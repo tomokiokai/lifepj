@@ -2,6 +2,7 @@ import { FC, memo } from "react";
 import { Route, Routes } from 'react-router-dom';
 
 import { Login } from "../components/pages/Login";
+import { Register } from "../components/pages/Register";
 import { homeRoutes } from "./HomeRoutes";
 import { Page404 } from "../components/pages/Page404";
 import { HeaderLayout } from "../components/templates/HeaderLayout";
@@ -12,6 +13,7 @@ export const Router: FC = memo(() => {
   <LoginUserProvider>
     <Routes >
       <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/home">
         {homeRoutes.map((route) => (
           <Route

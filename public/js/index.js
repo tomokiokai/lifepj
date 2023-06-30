@@ -7175,6 +7175,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/input/dist/chunk-GYFRIY2Z.mjs");
 /* harmony import */ var react_google_login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-google-login */ "./node_modules/react-google-login/dist/google-login.js");
 /* harmony import */ var react_google_login__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_google_login__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 /* harmony import */ var _atoms_botton_PrimaryButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../atoms/botton/PrimaryButton */ "./resources/ts/components/atoms/botton/PrimaryButton.tsx");
 /* harmony import */ var _hooks_useAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../hooks/useAuth */ "./resources/ts/hooks/useAuth.ts");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -7187,6 +7188,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // 追加
+
 
 
 
@@ -7195,7 +7198,7 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function ()
   var _useAuth = (0,_hooks_useAuth__WEBPACK_IMPORTED_MODULE_3__.useAuth)(),
     login = _useAuth.login,
     loading = _useAuth.loading;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState2 = _slicedToArray(_useState, 2),
     userId = _useState2[0],
     setUserId = _useState2[1];
@@ -7225,7 +7228,7 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function ()
         as: "h1",
         size: "lg",
         textAlign: "center",
-        children: "\u30E6\u30FC\u30B6\u30FC\u7BA1\u7406\u30A2\u30D7\u30EA"
+        children: "Login"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.Divider, {
         my: 4
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Stack, {
@@ -7237,7 +7240,7 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function ()
           value: userId,
           onChange: onChangeUserID
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_atoms_botton_PrimaryButton__WEBPACK_IMPORTED_MODULE_2__.PrimaryButton, {
-          isDisabled: userId === '',
+          isDisabled: userId === "",
           loading: loading,
           onClick: onClickLogin,
           children: "\u30ED\u30B0\u30A4\u30F3"
@@ -7248,6 +7251,9 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function ()
           onSuccess: responseGoogle,
           onFailure: responseGoogle,
           cookiePolicy: "single_host_origin"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Link, {
+          to: "/register",
+          children: "\u65B0\u898F\u767B\u9332\u306F\u3053\u3061\u3089"
         })]
       })]
     })
@@ -7275,6 +7281,94 @@ __webpack_require__.r(__webpack_exports__);
 var Page404 = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
     children: "404\u30DA\u30FC\u30B8"
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/ts/components/pages/Register.tsx":
+/*!****************************************************!*\
+  !*** ./resources/ts/components/pages/Register.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Register: () => (/* binding */ Register)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YGVX4ESO.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-WKZT7ZXJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/input/dist/chunk-GYFRIY2Z.mjs");
+/* harmony import */ var _atoms_botton_PrimaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../atoms/botton/PrimaryButton */ "./resources/ts/components/atoms/botton/PrimaryButton.tsx");
+/* harmony import */ var _hooks_useRegister__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hooks/useRegister */ "./resources/ts/hooks/useRegister.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var Register = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
+  var _useRegister = (0,_hooks_useRegister__WEBPACK_IMPORTED_MODULE_2__.useRegister)(),
+    register = _useRegister.register,
+    loading = _useRegister.loading;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    userId = _useState2[0],
+    setUserId = _useState2[1];
+  var onChangeUserID = function onChangeUserID(e) {
+    return setUserId(e.target.value);
+  };
+  var onClickRegister = function onClickRegister() {
+    return register(userId);
+  }; // register関数を呼び出す
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.Flex, {
+    align: "center",
+    justify: "center",
+    height: "100vh",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__.Box, {
+      bg: "white",
+      w: "sm",
+      p: 4,
+      borderRadius: "md",
+      shadow: "md",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Heading, {
+        as: "h1",
+        size: "lg",
+        textAlign: "center",
+        children: "Register"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Divider, {
+        my: 4
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.Stack, {
+        spacing: 6,
+        py: 4,
+        px: 10,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Input, {
+          placeholder: "\u30E6\u30FC\u30B6\u30FCID",
+          value: userId,
+          onChange: onChangeUserID
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_atoms_botton_PrimaryButton__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
+          isDisabled: userId === '',
+          loading: loading,
+          onClick: onClickRegister // onClickLoginではなくonClickRegisterに変更する
+          ,
+          children: "\u767B\u9332"
+        })]
+      })]
+    })
   });
 });
 
@@ -7629,6 +7723,76 @@ var useMessage = function useMessage() {
 
 /***/ }),
 
+/***/ "./resources/ts/hooks/useRegister.ts":
+/*!*******************************************!*\
+  !*** ./resources/ts/hooks/useRegister.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useRegister: () => (/* binding */ useRegister)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _useMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useMessage */ "./resources/ts/hooks/useMessage.ts");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var useRegister = function useRegister() {
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+  var _useMessage = (0,_useMessage__WEBPACK_IMPORTED_MODULE_1__.useMessage)(),
+    showMessage = _useMessage.showMessage;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    loading = _useState2[0],
+    setLoading = _useState2[1];
+  var register = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (id) {
+    setLoading(true);
+
+    // ユーザーの新規登録処理を行うAPIのエンドポイントに置き換える
+    axios__WEBPACK_IMPORTED_MODULE_3__["default"].post("https://api.example.com/register", {
+      id: id
+    }).then(function (res) {
+      if (res.data) {
+        showMessage({
+          title: "新規登録が完了しました",
+          status: "success"
+        });
+        navigate("/login");
+      } else {
+        showMessage({
+          title: "新規登録に失敗しました",
+          status: "error"
+        });
+        setLoading(false);
+      }
+    })["catch"](function () {
+      showMessage({
+        title: "新規登録に失敗しました",
+        status: "error"
+      });
+      setLoading(false);
+    });
+  }, [navigate, showMessage]);
+  return {
+    register: register,
+    loading: loading
+  };
+};
+
+/***/ }),
+
 /***/ "./resources/ts/hooks/useSelectUser.ts":
 /*!*********************************************!*\
   !*** ./resources/ts/hooks/useSelectUser.ts ***!
@@ -7826,13 +7990,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_pages_Login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/pages/Login */ "./resources/ts/components/pages/Login.tsx");
-/* harmony import */ var _HomeRoutes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HomeRoutes */ "./resources/ts/router/HomeRoutes.tsx");
-/* harmony import */ var _components_pages_Page404__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/pages/Page404 */ "./resources/ts/components/pages/Page404.tsx");
-/* harmony import */ var _components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/templates/HeaderLayout */ "./resources/ts/components/templates/HeaderLayout.tsx");
-/* harmony import */ var _providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../providers/LoginUserProvider */ "./resources/ts/providers/LoginUserProvider.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_pages_Register__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/pages/Register */ "./resources/ts/components/pages/Register.tsx");
+/* harmony import */ var _HomeRoutes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HomeRoutes */ "./resources/ts/router/HomeRoutes.tsx");
+/* harmony import */ var _components_pages_Page404__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/pages/Page404 */ "./resources/ts/components/pages/Page404.tsx");
+/* harmony import */ var _components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/templates/HeaderLayout */ "./resources/ts/components/templates/HeaderLayout.tsx");
+/* harmony import */ var _providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../providers/LoginUserProvider */ "./resources/ts/providers/LoginUserProvider.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -7843,24 +8009,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Router = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_5__.LoginUserProvider, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_6__.LoginUserProvider, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
         path: "/",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_pages_Login__WEBPACK_IMPORTED_MODULE_1__.Login, {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Login__WEBPACK_IMPORTED_MODULE_1__.Login, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "/register",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Register__WEBPACK_IMPORTED_MODULE_2__.Register, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
         path: "/home",
-        children: _HomeRoutes__WEBPACK_IMPORTED_MODULE_2__.homeRoutes.map(function (route) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        children: _HomeRoutes__WEBPACK_IMPORTED_MODULE_3__.homeRoutes.map(function (route) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
             path: route.path,
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_4__.HeaderLayout, {
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_5__.HeaderLayout, {
               children: route.element
             })
           }, route.path);
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
         path: "*",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_pages_Page404__WEBPACK_IMPORTED_MODULE_3__.Page404, {})
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Page404__WEBPACK_IMPORTED_MODULE_4__.Page404, {})
       })]
     })
   });
