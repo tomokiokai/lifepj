@@ -1,11 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { ChakraProvider, Button } from '@chakra-ui/react';
+import { BrowserRouter } from 'react-router-dom';
+
+import theme from './theme/theme';
+import { Router } from './router/Router';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello, React 18 + TypeScript!</h1>
-    </div>
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ChakraProvider>
   );
 };
 
