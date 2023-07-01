@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
-import { User } from "../types/api/user";
 import { useNavigate } from "react-router-dom";
 import { useMessage } from "./useMessage";
 import { useLoginUser } from "../hooks/useLoginUser";
@@ -9,26 +8,30 @@ export const useAuth = () => {
   const navigate = useNavigate();
   const { showMessage } = useMessage();
   const { setLoginUser } = useLoginUser();
-  
+
   const [loading, setLoading] = useState(false);
 
-  const login = useCallback((id: string) => { 
+  const login = useCallback(({ email, password }: { email: string, password: string }) => {
     setLoading(true);
 
-    axios.get<User>(`https://jsonplaceholder.typicode.com/users/${id}`).then((res) => {
-      if (res.data) {
-        setLoginUser(res.data)
-        showMessage({ title: "ログインしました", status: "success" });
-        navigate("/home");
-      } else {
-        showMessage({ title: "ユーザーが見つかりません", status: "error" });
+    axios
+      .post("/api/login", { email, password })
+      .then((response) => {
+        const { data } = response;
+        if (data.user) {
+          setLoginUser(data.user);
+          showMessage({ title: "ログインしました", status: "success" });
+          navigate("/home");
+        } else {
+          showMessage({ title: "ユーザーが見つかりません", status: "error" });
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        showMessage({ title: "ログインできません", status: "error" });
         setLoading(false);
-      }
-    }).catch(() => {
-      showMessage({ title: "ログインできません", status: "error" })
-      setLoading(false);
-    });
-  },
-    [navigate, showMessage, setLoginUser]);
-  return { login, loading }
-}
+      });
+  }, [navigate, showMessage, setLoginUser]);
+
+  return { login, loading };
+};

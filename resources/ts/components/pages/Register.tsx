@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, memo, useState } from "react";
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 
-import { PrimaryButton } from "../atoms/botton/PrimaryButton";
+import { PrimaryButton } from "../atoms/button/PrimaryButton";
 import { useRegister } from "../../hooks/useRegister";
 
 export const Register: FC = memo(() => {

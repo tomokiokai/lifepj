@@ -2,7 +2,7 @@ import { FC, memo, useCallback } from "react";
 import { Box, Flex, Heading, Link, useDisclosure} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-import { MenuIconButton } from "../../atoms/botton/MenuIconButton";
+import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header: FC = memo(() => {
