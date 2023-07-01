@@ -51,7 +51,9 @@ export const Login: FC = memo(() => {
             cookiePolicy="single_host_origin"
           />
           {/* Registerへのリンク */}
-          <Link to="/register">新規登録はこちら</Link>
+          <Flex align="center" justify="center">
+            <Link to="/register">新規登録はこちら</Link>
+          </Flex>
         </Stack>
       </Box>
     </Flex>

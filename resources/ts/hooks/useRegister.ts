@@ -10,22 +10,28 @@ export const useRegister = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const register = useCallback((id: string) => {
+  const register = useCallback((username: string, password: string, email: string) => {
     setLoading(true);
 
-    // ユーザーの新規登録処理を行うAPIのエンドポイントに置き換える
-    axios.post<User>(`https://api.example.com/register`, { id }).then((res) => {
-      if (res.data) {
-        showMessage({ title: "新規登録が完了しました", status: "success" });
-        navigate("/login");
-      } else {
+    axios
+      .post<User>("api/register", { // Laravelのエンドポイントに合わせてURLを修正する
+        username,
+        password,
+        email,
+      })
+      .then((res) => {
+        if (res.data) {
+          showMessage({ title: "新規登録が完了しました", status: "success" });
+          navigate("/");
+        } else {
+          showMessage({ title: "新規登録に失敗しました", status: "error" });
+          setLoading(false);
+        }
+      })
+      .catch(() => {
         showMessage({ title: "新規登録に失敗しました", status: "error" });
         setLoading(false);
-      }
-    }).catch(() => {
-      showMessage({ title: "新規登録に失敗しました", status: "error" });
-      setLoading(false);
-    });
+      });
   }, [navigate, showMessage]);
 
   return { register, loading };

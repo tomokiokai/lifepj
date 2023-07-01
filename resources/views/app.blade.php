@@ -11,7 +11,6 @@
 <body>
   <div id="root"></div>
   <script src="{{ asset('js/index.js') }}"></script>
-  <script src="{{ asset('path/to/your/react/bundle.js') }}"></script>
 </body>
 
 </html>
