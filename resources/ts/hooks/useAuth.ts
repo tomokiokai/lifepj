@@ -22,6 +22,7 @@ export const useAuth = () => {
           setLoginUser(data.user);
           showMessage({ title: "ログインしました", status: "success" });
           navigate("/home");
+          console.log("setLoginUser:", data.user);
         } else {
           showMessage({ title: "ユーザーが見つかりません", status: "error" });
           setLoading(false);
@@ -33,5 +34,23 @@ export const useAuth = () => {
       });
   }, [navigate, showMessage, setLoginUser]);
 
-  return { login, loading };
+  const logout = useCallback(() => {
+    setLoading(true);
+
+    axios
+      .post("/api/logout")
+      .then(() => {
+        setLoginUser(null);
+        showMessage({ title: "ログアウトしました", status: "success" });
+        setLoading(false);
+        navigate("/"); // ログアウト後のリダイレクト先を指定
+        console.log("setLoginUser:", null);
+      })
+      .catch(() => {
+        showMessage({ title: "ログアウトできません", status: "error" });
+        setLoading(false);
+      });
+  }, [navigate, setLoginUser, showMessage]);
+
+  return { login, logout, loading };
 };

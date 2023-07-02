@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,5 +18,12 @@ class AuthController extends Controller
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(['message' => 'ログアウトしました']);
     }
 }

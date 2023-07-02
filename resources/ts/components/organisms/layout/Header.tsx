@@ -1,17 +1,23 @@
 import { FC, memo, useCallback } from "react";
 import { Box, Flex, Heading, Link, useDisclosure} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
 
 export const Header: FC = memo(() => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
+  const { logout } = useAuth(); // useAuthフックからlogout関数を取得
 
   const onClickHome = useCallback(() => navigate("/home"), [navigate]);
   const onClickUserManagement = useCallback(() => navigate("/home/user_management"), [navigate]);
   const onClicSetting = useCallback(() => navigate("/home/setting"), [navigate]);
+
+  const handleLogout = useCallback(() => {
+    logout(); // ログアウト処理を呼び出す
+  }, [logout]);
 
 
   return (
@@ -34,7 +40,10 @@ export const Header: FC = memo(() => {
           <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
         </Box>
           <Link onClick={onClicSetting}>設定</Link>
-      </Flex>
+        </Flex>
+        <Box>
+          <Link onClick={handleLogout}>ログアウト</Link> {/* ログアウトボタンを追加 */}
+        </Box>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
       <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClicSetting={onClicSetting} />

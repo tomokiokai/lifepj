@@ -6832,15 +6832,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/hooks/dist/chunk-CHB4ZXZG.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YTV6DHKL.mjs");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../atoms/button/MenuIconButton */ "./resources/ts/components/atoms/button/MenuIconButton.tsx");
-/* harmony import */ var _molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../molecules/MenuDrawer */ "./resources/ts/components/molecules/MenuDrawer.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/hooks/dist/chunk-CHB4ZXZG.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YTV6DHKL.mjs");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _hooks_useAuth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../hooks/useAuth */ "./resources/ts/hooks/useAuth.ts");
+/* harmony import */ var _atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../atoms/button/MenuIconButton */ "./resources/ts/components/atoms/button/MenuIconButton.tsx");
+/* harmony import */ var _molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../molecules/MenuDrawer */ "./resources/ts/components/molecules/MenuDrawer.tsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -6850,11 +6852,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
-  var _useDisclosure = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.useDisclosure)(),
+  var _useDisclosure = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__.useDisclosure)(),
     isOpen = _useDisclosure.isOpen,
     onOpen = _useDisclosure.onOpen,
     onClose = _useDisclosure.onClose;
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+  var _useAuth = (0,_hooks_useAuth__WEBPACK_IMPORTED_MODULE_1__.useAuth)(),
+    logout = _useAuth.logout; // useAuthフックからlogout関数を取得
+
   var onClickHome = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     return navigate("/home");
   }, [navigate]);
@@ -6864,8 +6869,11 @@ var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (
   var onClicSetting = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     return navigate("/home/setting");
   }, [navigate]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Flex, {
+  var handleLogout = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    logout(); // ログアウト処理を呼び出す
+  }, [logout]);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Flex, {
       as: "nav",
       bg: "green.300",
       color: "gray.50",
@@ -6875,7 +6883,7 @@ var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (
         base: 3,
         md: 5
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Flex, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Flex, {
         align: "center",
         as: "a",
         mr: 8,
@@ -6883,7 +6891,7 @@ var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (
           cursor: "pointer"
         },
         onClick: onClickHome,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Heading, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.Heading, {
           as: "h1",
           fontSize: {
             base: "md",
@@ -6891,7 +6899,7 @@ var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (
           },
           children: "\u9867\u5BA2\u7BA1\u7406\u30A2\u30D7\u30EA"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Flex, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Flex, {
         align: "center",
         fontSize: "sm",
         flexGrow: 2,
@@ -6899,20 +6907,25 @@ var Header = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (
           base: "none",
           md: "flex"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.Box, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Box, {
           pr: 4,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Link, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Link, {
             onClick: onClickUserManagement,
             children: "\u30E6\u30FC\u30B6\u30FC\u4E00\u89A7"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Link, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Link, {
           onClick: onClicSetting,
           children: "\u8A2D\u5B9A"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_1__.MenuIconButton, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Box, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Link, {
+          onClick: handleLogout,
+          children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
+        }), " "]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_2__.MenuIconButton, {
         onOpen: onOpen
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_2__.MenuDrawer, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_3__.MenuDrawer, {
       onClose: onClose,
       isOpen: isOpen,
       onClickHome: onClickHome,
@@ -7675,6 +7688,7 @@ var useAuth = function useAuth() {
           status: "success"
         });
         navigate("/home");
+        console.log("setLoginUser:", data.user);
       } else {
         showMessage({
           title: "ユーザーが見つかりません",
@@ -7690,8 +7704,28 @@ var useAuth = function useAuth() {
       setLoading(false);
     });
   }, [navigate, showMessage, setLoginUser]);
+  var logout = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setLoading(true);
+    axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/logout").then(function () {
+      setLoginUser(null);
+      showMessage({
+        title: "ログアウトしました",
+        status: "success"
+      });
+      setLoading(false);
+      navigate("/"); // ログアウト後のリダイレクト先を指定
+      console.log("setLoginUser:", null);
+    })["catch"](function () {
+      showMessage({
+        title: "ログアウトできません",
+        status: "error"
+      });
+      setLoading(false);
+    });
+  }, [navigate, setLoginUser, showMessage]);
   return {
     login: login,
+    logout: logout,
     loading: loading
   };
 };
