@@ -2,7 +2,7 @@ import { Home } from "../components/pages/Home";
 import { Setting } from "../components/pages/Setting";
 import { UserManagement } from "../components/pages/UserManagement";
 
-export const homeRoutes = [
+export  const homeRoutes = [
   {
     path: "",
     element: <Home />
