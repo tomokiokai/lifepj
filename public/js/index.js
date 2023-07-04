@@ -7678,7 +7678,7 @@ var useAuth = function useAuth() {
     setLoading = _useState2[1];
   var login = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)( /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(_ref) {
-      var email, password, response, _response$data, token, user, expiresIn, expirationTime;
+      var email, password, response, _response$data, token, user, expirationTime;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -7689,21 +7689,32 @@ var useAuth = function useAuth() {
             return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/login", {
               email: email,
               password: password
+            }, {
+              headers: {
+                "Cache-Control": "no-cache"
+              }
             });
           case 5:
             response = _context.sent;
-            _response$data = response.data, token = _response$data.token, user = _response$data.user, expiresIn = _response$data.expiresIn; // トークンをLocalStorageに保存
+            _response$data = response.data, token = _response$data.token, user = _response$data.user;
             localStorage.setItem("token", token);
-            setLoginUser(user);
-            showMessage({
-              title: "ログインしました",
-              status: "success"
+            _context.next = 10;
+            return new Promise(function (resolve) {
+              setLoginUser(function () {
+                showMessage({
+                  title: "ログインしました",
+                  status: "success"
+                });
+                resolve(user);
+                return user;
+              });
             });
-            navigate("/home");
-            console.log("setLoginUser:", user);
+          case 10:
+            console.log(user); // ユーザーデータのログ出力
 
-            // 有効期限をLocalStorageに保存（ミリ秒単位）
-            expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1時間（ミリ秒単位）
+            // ユーザー情報が更新された後に遷移
+            navigate("/home");
+            expirationTime = new Date().getTime() + 60 * 60 * 1000;
             localStorage.setItem("expirationTime", expirationTime.toString());
             _context.next = 20;
             break;
@@ -7725,21 +7736,44 @@ var useAuth = function useAuth() {
       return _ref2.apply(this, arguments);
     };
   }(), [navigate, showMessage, setLoginUser]);
-  var logout = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
-    setLoading(true);
+  var logout = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          setLoading(true);
+          _context2.prev = 1;
+          _context2.next = 4;
+          return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post("/api/logout");
+        case 4:
+          // ローカルストレージのトークンと有効期限を削除
+          localStorage.removeItem("token");
+          localStorage.removeItem("expirationTime");
 
-    // トークンと有効期限をLocalStorageから削除
-    localStorage.removeItem("token");
-    localStorage.removeItem("expirationTime");
-    setLoginUser(null);
-    showMessage({
-      title: "ログアウトしました",
-      status: "success"
-    });
-    setLoading(false);
-    navigate("/"); // ログアウト後のリダイレクト先を指定
-    console.log("setLoginUser:", null);
-  }, [navigate, setLoginUser, showMessage]);
+          // ユーザー情報をnullにリセット
+          setLoginUser(null);
+          showMessage({
+            title: "ログアウトしました",
+            status: "success"
+          });
+          setLoading(false);
+          navigate("/"); // ログアウト後のリダイレクト先を指定
+          console.log("setLoginUser:", null);
+          _context2.next = 17;
+          break;
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](1);
+          showMessage({
+            title: "ログアウトできませんでした",
+            status: "error"
+          });
+          setLoading(false);
+        case 17:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[1, 13]]);
+  })), [navigate, setLoginUser, showMessage]);
   return {
     login: login,
     logout: logout,
@@ -8071,8 +8105,7 @@ var homeRoutes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Router: () => (/* binding */ Router),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   Router: () => (/* binding */ Router)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -8093,39 +8126,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var Router = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
-  var token = localStorage.getItem("token");
-  var routeConfig = [{
-    path: "/",
-    element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Login__WEBPACK_IMPORTED_MODULE_1__.Login, {})
-  }, {
-    path: "/register",
-    element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Register__WEBPACK_IMPORTED_MODULE_2__.Register, {})
-  }, {
-    path: "/home",
-    element: token ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_5__.HeaderLayout, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, {
+  var token = localStorage.getItem("token"); // ユーザーのトークンなどを取得する処理
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_6__.LoginUserProvider, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "/",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Login__WEBPACK_IMPORTED_MODULE_1__.Login, {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "/register",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Register__WEBPACK_IMPORTED_MODULE_2__.Register, {})
+      }), token ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "/home",
         children: _HomeRoutes__WEBPACK_IMPORTED_MODULE_3__.homeRoutes.map(function (route) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
             path: route.path,
-            element: route.element
+            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_templates_HeaderLayout__WEBPACK_IMPORTED_MODULE_5__.HeaderLayout, {
+              children: route.element
+            })
           }, route.path);
         })
-      })
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Navigate, {
-      to: "/",
-      replace: true
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "/login",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Navigate, {
+          to: "/",
+          replace: true
+        })
+      }) // ユーザーがログインしていない場合はルートをリダイレクト
+      , /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        path: "*",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Page404__WEBPACK_IMPORTED_MODULE_4__.Page404, {})
+      })]
     })
-  }, {
-    path: "*",
-    element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_pages_Page404__WEBPACK_IMPORTED_MODULE_4__.Page404, {})
-  }];
-  var routing = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useRoutes)(routeConfig);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_providers_LoginUserProvider__WEBPACK_IMPORTED_MODULE_6__.LoginUserProvider, {
-    children: routing
   });
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Router);
 
 /***/ }),
 

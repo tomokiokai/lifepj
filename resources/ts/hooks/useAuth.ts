@@ -12,45 +12,62 @@ export const useAuth = () => {
   const [loading, setLoading] = useState(false);
 
   const login = useCallback(
-    async ({ email, password }: { email: string; password: string }) => {
-      setLoading(true);
-
-      try {
-        const response = await axios.post("/api/login", { email, password });
-        const { token, user, expiresIn } = response.data;
-
-        // トークンをLocalStorageに保存
-        localStorage.setItem("token", token);
-
-        setLoginUser(user);
-        showMessage({ title: "ログインしました", status: "success" });
-        navigate("/home");
-        console.log("setLoginUser:", user);
-
-        // 有効期限をLocalStorageに保存（ミリ秒単位）
-        const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1時間（ミリ秒単位）
-        localStorage.setItem("expirationTime", expirationTime.toString());
-      } catch (error) {
-        showMessage({ title: "ログインできません", status: "error" });
-        setLoading(false);
-      }
-    },
-    [navigate, showMessage, setLoginUser]
-  );
-
-  const logout = useCallback(() => {
+  async ({ email, password }: { email: string; password: string }) => {
     setLoading(true);
 
-    // トークンと有効期限をLocalStorageから削除
+    try {
+      const response = await axios.post("/api/login", { email, password }, { headers: { "Cache-Control": "no-cache" } });
+      const { token, user } = response.data;
+
+      localStorage.setItem("token", token);
+
+      await new Promise((resolve) => {
+        setLoginUser(() => {
+          showMessage({ title: "ログインしました", status: "success" });
+          resolve(user);
+          return user;
+        });
+      });
+
+      console.log(user); // ユーザーデータのログ出力
+
+      // ユーザー情報が更新された後に遷移
+      navigate("/home");
+      
+      const expirationTime = new Date().getTime() + 60 * 60 * 1000;
+      localStorage.setItem("expirationTime", expirationTime.toString());
+    } catch (error) {
+      showMessage({ title: "ログインできません", status: "error" });
+      setLoading(false);
+    }
+  },
+  [navigate, showMessage, setLoginUser]
+);
+
+
+  const logout = useCallback(async () => {
+  setLoading(true);
+
+  try {
+    // サーバーにログアウトリクエストを送信し、セッションを無効化する
+    await axios.post("/api/logout");
+
+    // ローカルストレージのトークンと有効期限を削除
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
 
+    // ユーザー情報をnullにリセット
     setLoginUser(null);
+
     showMessage({ title: "ログアウトしました", status: "success" });
     setLoading(false);
     navigate("/"); // ログアウト後のリダイレクト先を指定
     console.log("setLoginUser:", null);
-  }, [navigate, setLoginUser, showMessage]);
+  } catch (error) {
+    showMessage({ title: "ログアウトできませんでした", status: "error" });
+    setLoading(false);
+  }
+}, [navigate, setLoginUser, showMessage]);
 
   return { login, logout, loading };
 };

@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Route, Routes, Navigate, useRoutes } from "react-router-dom";
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import { Login } from "../components/pages/Login";
 import { Register } from "../components/pages/Register";
@@ -9,44 +9,34 @@ import { HeaderLayout } from "../components/templates/HeaderLayout";
 import { LoginUserProvider } from "../providers/LoginUserProvider";
 
 export const Router: FC = memo(() => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token"); // ユーザーのトークンなどを取得する処理
 
-  const routeConfig = [
-    {
-      path: "/",
-      element: <Login />
-    },
-    {
-      path: "/register",
-      element: <Register />
-    },
-    {
-      path: "/home",
-      element: token ? (
-        <HeaderLayout>
-          <Routes>
-            {homeRoutes.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={route.element}
-              />
-            ))}
-          </Routes>
-        </HeaderLayout>
-      ) : (
-        <Navigate to="/" replace />
-      )
-    },
-    {
-      path: "*",
-      element: <Page404 />
-    }
-  ];
-
-  const routing = useRoutes(routeConfig);
-
-  return <LoginUserProvider>{routing}</LoginUserProvider>;
+  return (
+    <LoginUserProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {token ? (
+          <Route path="/home">
+            
+              {homeRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+              <HeaderLayout>
+                {route.element}
+              </HeaderLayout>
+            }
+                />
+              ))}
+            
+          </Route>
+        ) : (
+          <Route path="/login" element={<Navigate to="/" replace />} /> // ユーザーがログインしていない場合はルートをリダイレクト
+        )}
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </LoginUserProvider>
+  );
 });
-
-export default Router;
