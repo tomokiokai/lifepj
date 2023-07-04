@@ -33,7 +33,7 @@ export const Router: FC = memo(() => {
             
           </Route>
         ) : (
-          <Route path="/login" element={<Navigate to="/" replace />} /> // ユーザーがログインしていない場合はルートをリダイレクト
+          <Route path="/home/*" element={<Navigate to="/" replace />} /> // ユーザーがログインしていない場合はルートをリダイレクト
         )}
         <Route path="*" element={<Page404 />} />
       </Routes>
