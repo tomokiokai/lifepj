@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from 'recoil';
+import { loginUserState } from '../store/userState';
 import { useMessage } from "./useMessage";
-import { useLoginUser } from "../hooks/useLoginUser";
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const { showMessage } = useMessage();
-  const { setLoginUser } = useLoginUser();
+  const setLoginUser = useSetRecoilState(loginUserState);
   const [loading, setLoading] = useState(false);
 
   const login = useCallback(
@@ -20,13 +21,13 @@ export const useAuth = () => {
 
         localStorage.setItem("token", token);
 
-        await new Promise((resolve) => {
-          setLoginUser(() => {
-            showMessage({ title: "ログインしました", status: "success" });
-            resolve(user);
-            return user;
-          });
-        });
+        // ユーザー情報をRecoil stateに保存
+        setLoginUser(user);
+
+        // ユーザー情報をローカルストレージにも保存
+        localStorage.setItem("loginUser", JSON.stringify(user));
+
+        showMessage({ title: "ログインしました", status: "success" });
 
         console.log(user);
 
@@ -48,6 +49,9 @@ export const useAuth = () => {
 
     try {
       await axios.post("/api/logout");
+
+      // ローカルストレージからユーザー情報を削除
+      localStorage.removeItem("loginUser");
 
       localStorage.removeItem("token");
       setLoginUser(null);
