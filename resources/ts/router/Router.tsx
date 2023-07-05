@@ -1,4 +1,4 @@
-import { FC, memo, useState } from "react";
+import { FC, memo } from "react";
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Login } from "../components/pages/Login";
@@ -10,12 +10,31 @@ import { useAuth } from "../hooks/useAuth";
 
 export const Router: FC = memo(() => {
   const { login, loading } = useAuth();
+  const isLoggedIn = !!localStorage.getItem("token");
 
   return (
     <Routes>
-      <Route path="/" element={<Login login={login} loading={loading} />} />
-      <Route path="/register" element={<Register />} />
-      {localStorage.getItem("token") ? (
+      <Route
+        path="/"
+        element={
+          isLoggedIn ? (
+            <Navigate to="/home" replace />
+          ) : (
+            <Login login={login} loading={loading} />
+          )
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          isLoggedIn ? (
+            <Navigate to="/home" replace />
+          ) : (
+            <Register />
+          )
+        }
+      />
+      {isLoggedIn ? (
         <Route path="/home">
           {homeRoutes.map((route) => (
             <Route
