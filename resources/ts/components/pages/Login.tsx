@@ -2,10 +2,13 @@ import { ChangeEvent, FC, memo, useState } from "react";
 import { Box, Divider, Flex, Heading, Input, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { PrimaryButton } from "../atoms/button/PrimaryButton";
-import { useAuth } from "../../hooks/useAuth";
 
-export const Login: FC = memo(() => {
-  const { login, loading } = useAuth();
+type LoginProps = {
+  login: ({ email, password }: { email: string; password: string }) => Promise<void>;
+  loading: boolean;
+};
+
+export const Login: FC<LoginProps> = memo(({ login, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,7 +19,7 @@ export const Login: FC = memo(() => {
     setPassword(e.target.value);
 
   const onClickLogin = () => {
-    login({ email, password }); // ユーザーのemailとpasswordを引数としてlogin関数を呼び出す
+    login({ email, password });
   };
 
   return (
