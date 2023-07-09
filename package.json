@@ -19,6 +19,7 @@
         "axios": "^1.1.2",
         "browser-sync": "^2.29.3",
         "browser-sync-webpack-plugin": "^2.3.0",
+        "env-cmd": "^10.1.0",
         "laravel-vite-plugin": "^0.7.2",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",

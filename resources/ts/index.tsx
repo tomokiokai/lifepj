@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+console.log(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+console.log(process.env.REACT_APP_GOOGLE_CLIENT_SECRET);
+
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
