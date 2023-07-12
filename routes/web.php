@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/verify', [VerificationController::class, 'verify'])->name('verification.verify');
+
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
+
+

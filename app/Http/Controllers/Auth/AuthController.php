@@ -11,6 +11,8 @@ use Google_Client;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use App\Mail\VerificationCodeMailable;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -20,6 +22,12 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            // メールアドレスが確認済みであることをチェックする
+            if (!$user->is_verified) {
+                return response()->json(['error' => 'Please verify your email address'], 401);
+            }
+
             $token = JWTAuth::fromUser($user);
 
             return response()->json(['token' => $token, 'user' => $user]);
@@ -40,8 +48,7 @@ class AuthController extends Controller
         $googleToken = $request->input('googleToken');
 
         $clientId = env('GOOGLE_CLIENT_ID');
-        $clientSecret =
-        env('GOOGLE_CLIENT_SECRET');;
+        $clientSecret = env('GOOGLE_CLIENT_SECRET');
 
         // Google_Client を設定
         $client = new Google_Client();
@@ -62,13 +69,23 @@ class AuthController extends Controller
                     $user = User::create([
                         'email' => $payload['email'],
                         'name' => $payload['name'],
-                        'password' => Hash::make(Str::random(16))
+                        'password' => Hash::make(Str::random(16)),
+                        'verification_code' => Str::random(16), // 2段階認証用のランダムなコード
+                        'is_verified' => false,
                     ]);
+                    // メールを送信して2段階認証を促す
+                    Mail::to($user->email)->send(new VerificationCodeMailable($user->verification_code));
                 } catch (\Exception $e) {
                     // ここで例外をキャッチしてログに記録したり、エラーメッセージをクライアントに返したりします
                     Log::error('Failed to create user', ['error' => $e->getMessage()]);
                     return response()->json(['error' => 'Failed to create user'], 500);
                 }
+            }
+
+            // 2段階認証が有効かどうかチェック
+            if (!$user->is_verified) {
+                // 2段階認証がまだ完了していない場合の処理
+                return response()->json(['error' => 'Please complete the two-factor authentication'], 401);
             }
 
             // JWTトークンを生成します。
@@ -83,5 +100,6 @@ class AuthController extends Controller
         }
     }
 }
+
 
 
