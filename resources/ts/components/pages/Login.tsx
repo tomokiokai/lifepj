@@ -126,8 +126,15 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
             ログイン
           </PrimaryButton>
           {/* Google Login */}
-          <GoogleLoginButton onClick={handleGoogleLogin} />
-          {/* Registerへのリンク */}
+          <GoogleLoginButton onClick={handleGoogleLogin} buttonText="Login with Google" />
+これで、ボタンのテキストが Login.tsx と Register.tsx の両方で異なることが確認できます。Register.tsx では "Register & Login with Google" と表示され、Login.tsx では "Login with Google" と表示されます。
+
+
+
+
+
+
+Regenerate response
           <Flex align="center" justify="center">
             <Link to="/register">新規登録はこちら</Link>
           </Flex>

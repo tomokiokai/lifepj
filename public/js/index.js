@@ -6692,10 +6692,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   GoogleLoginButton: () => (/* binding */ GoogleLoginButton)
 /* harmony export */ });
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/button/dist/chunk-NAA7TEES.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/image/dist/chunk-SMHKDLMK.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-P74GIWPW.mjs");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/button/dist/chunk-NAA7TEES.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/image/dist/chunk-SMHKDLMK.mjs");
 /* harmony import */ var _assets_images_GoogleLogo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/images/GoogleLogo.svg */ "./resources/ts/assets/images/GoogleLogo.svg");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -6703,15 +6705,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var GoogleLoginButton = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (_ref) {
-  var onClick = _ref.onClick;
+var GoogleLoginButton = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (props) {
+  var onClick = props.onClick,
+    buttonText = props.buttonText; // buttonTextをpropsから抽出します
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    leftIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.Image, {
-      src: _assets_images_GoogleLogo_svg__WEBPACK_IMPORTED_MODULE_1__["default"],
-      boxSize: "25px"
+    leftIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.Flex, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__.Image, {
+        src: _assets_images_GoogleLogo_svg__WEBPACK_IMPORTED_MODULE_1__["default"],
+        boxSize: "20px"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Text, {
+        ml: "2",
+        children: buttonText
+      }), " "]
     }),
     onClick: onClick,
-    children: "Login with Google"
+    backgroundColor: "white",
+    color: "gray.500",
+    boxShadow: "0px 4px 14px rgba(0, 0, 0, 0.1)",
+    _hover: {
+      bg: "gray.100"
+    },
+    _active: {
+      bg: "gray.200"
+    }
   });
 });
 
@@ -7398,8 +7415,9 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (_
           onClick: onClickLogin,
           children: "\u30ED\u30B0\u30A4\u30F3"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_atoms_button_GoogleLoginButton__WEBPACK_IMPORTED_MODULE_5__.GoogleLoginButton, {
-          onClick: handleGoogleLogin
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Flex, {
+          onClick: handleGoogleLogin,
+          buttonText: "Login with Google"
+        }), "\u3053\u308C\u3067\u3001\u30DC\u30BF\u30F3\u306E\u30C6\u30AD\u30B9\u30C8\u304C Login.tsx \u3068 Register.tsx \u306E\u4E21\u65B9\u3067\u7570\u306A\u308B\u3053\u3068\u304C\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002Register.tsx \u3067\u306F \"Register & Login with Google\" \u3068\u8868\u793A\u3055\u308C\u3001Login.tsx \u3067\u306F \"Login with Google\" \u3068\u8868\u793A\u3055\u308C\u307E\u3059\u3002 Regenerate response", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Flex, {
           align: "center",
           justify: "center",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Link, {
@@ -7451,29 +7469,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YGVX4ESO.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-WKZT7ZXJ.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/input/dist/chunk-GYFRIY2Z.mjs");
-/* harmony import */ var _atoms_button_PrimaryButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../atoms/button/PrimaryButton */ "./resources/ts/components/atoms/button/PrimaryButton.tsx");
-/* harmony import */ var _hooks_useRegister__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../hooks/useRegister */ "./resources/ts/hooks/useRegister.ts");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YGVX4ESO.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-WKZT7ZXJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/input/dist/chunk-GYFRIY2Z.mjs");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! qs */ "./node_modules/qs/lib/index.js");
+/* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var recoil__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recoil */ "./node_modules/recoil/es/index.js");
+/* harmony import */ var _store_userState__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store/userState */ "./resources/ts/store/userState.ts");
+/* harmony import */ var _atoms_button_PrimaryButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../atoms/button/PrimaryButton */ "./resources/ts/components/atoms/button/PrimaryButton.tsx");
+/* harmony import */ var _atoms_button_GoogleLoginButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../atoms/button/GoogleLoginButton */ "./resources/ts/components/atoms/button/GoogleLoginButton.tsx");
+/* harmony import */ var _hooks_useRegister__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../hooks/useRegister */ "./resources/ts/hooks/useRegister.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+ // useEffectを追加
+
+ // これらを追加
+ // 追加
+ // 追加
+ // 追加
+ // 追加
 
 
-
+ // これを追加
 
 
 
 var Register = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function () {
-  var _useRegister = (0,_hooks_useRegister__WEBPACK_IMPORTED_MODULE_2__.useRegister)(),
+  var _useRegister = (0,_hooks_useRegister__WEBPACK_IMPORTED_MODULE_6__.useRegister)(),
     register = _useRegister.register,
     loading = _useRegister.loading;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
@@ -7488,6 +7520,18 @@ var Register = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function
     _useState6 = _slicedToArray(_useState5, 2),
     email = _useState6[0],
     setEmail = _useState6[1];
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useNavigate)(); // 追加
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useLocation)(); // 追加
+  var setLoginUser = (0,recoil__WEBPACK_IMPORTED_MODULE_2__.useSetRecoilState)(_store_userState__WEBPACK_IMPORTED_MODULE_3__.loginUserState); // 追加
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // 追加
+    var urlParams = new URLSearchParams(location.search);
+    var code = urlParams.get("code");
+    if (code) {
+      handleGoogleCallback(code);
+    }
+  }, [location]);
   var onChangeUsername = function onChangeUsername(e) {
     return setUsername(e.target.value);
   };
@@ -7499,49 +7543,87 @@ var Register = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function
   };
   var onClickRegister = function onClickRegister() {
     return register(username, password, email);
-  }; // register関数を呼び出す
+  };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.Flex, {
+  // Googleログイン用の関数を追加
+  var handleGoogleLogin = function handleGoogleLogin() {
+    var clientId = "633299709693-8liuh81vv6iuucerdtedmc9ancjg5vnj.apps.googleusercontent.com" || 0;
+    var redirectUri = "http://localhost" || 0;
+    var scope = "profile email";
+    var authUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=".concat(clientId, "&redirect_uri=").concat(redirectUri, "&response_type=code&scope=").concat(scope);
+    window.location.href = authUrl;
+  };
+  var handleGoogleCallback = function handleGoogleCallback(code) {
+    var clientId = "633299709693-8liuh81vv6iuucerdtedmc9ancjg5vnj.apps.googleusercontent.com" || 0;
+    var clientSecret = "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" || 0;
+    var redirectUri = "http://localhost" || 0;
+    axios__WEBPACK_IMPORTED_MODULE_9__["default"].post("https://oauth2.googleapis.com/token", qs__WEBPACK_IMPORTED_MODULE_1___default().stringify({
+      code: code,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUri,
+      grant_type: "authorization_code"
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(function (response) {
+      var idToken = response.data.id_token;
+      return axios__WEBPACK_IMPORTED_MODULE_9__["default"].post("/api/google-login", {
+        googleToken: idToken
+      });
+    }).then(function (response) {
+      localStorage.setItem('token', response.data.token);
+      setLoginUser(response.data.user);
+      navigate("/home");
+    })["catch"](function (error) {
+      console.error(error.response.data);
+      console.error(error);
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Flex, {
     align: "center",
     justify: "center",
     height: "100vh",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_5__.Box, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Box, {
       bg: "white",
       w: "sm",
       p: 4,
       borderRadius: "md",
       shadow: "md",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_6__.Heading, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Heading, {
         as: "h1",
         size: "lg",
         textAlign: "center",
         children: "Register"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.Divider, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__.Divider, {
         my: 4
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.Stack, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_14__.Stack, {
         spacing: 6,
         py: 4,
         px: 10,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Input, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_15__.Input, {
           placeholder: "\u30E6\u30FC\u30B6\u30FC\u540D",
           value: username,
           onChange: onChangeUsername
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Input, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_15__.Input, {
           type: "password",
           placeholder: "\u30D1\u30B9\u30EF\u30FC\u30C9",
           value: password,
           onChange: onChangePassword
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Input, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_15__.Input, {
           type: "email",
           placeholder: "\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9",
           value: email,
           onChange: onChangeEmail
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_atoms_button_PrimaryButton__WEBPACK_IMPORTED_MODULE_1__.PrimaryButton, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_atoms_button_PrimaryButton__WEBPACK_IMPORTED_MODULE_4__.PrimaryButton, {
           isDisabled: username === '' || password === '' || email === '',
           loading: loading,
-          onClick: onClickRegister // onClickLoginではなくonClickRegisterに変更する
-          ,
+          onClick: onClickRegister,
           children: "\u767B\u9332"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_atoms_button_GoogleLoginButton__WEBPACK_IMPORTED_MODULE_5__.GoogleLoginButton, {
+          onClick: handleGoogleLogin,
+          buttonText: "Register with Google"
         })]
       })]
     })
