@@ -6981,7 +6981,7 @@ var Header = function Header() {
           base: "none",
           md: "flex"
         },
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Box, {
+        children: [loginUser && (loginUser.role === 2 || loginUser.role === 3) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Box, {
           pr: 4,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Link, {
             onClick: onClickUserManagement,
@@ -8047,7 +8047,7 @@ var useMessage = function useMessage() {
       title: title,
       status: status,
       position: "top",
-      duration: 2000,
+      duration: 4000,
       isClosable: true
     });
   }, [toast]);
@@ -8102,7 +8102,7 @@ var useRegister = function useRegister() {
     }).then(function (res) {
       if (res.data) {
         showMessage({
-          title: "新規登録が完了しました",
+          title: "アカウントの認証メールを送信しました。",
           status: "success"
         });
         navigate("/");

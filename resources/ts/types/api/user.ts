@@ -20,4 +20,5 @@ export type User = {
     catchPhrase: string;
     bs: string;
   };
+  role: number; // ロールプロパティを追加
 };

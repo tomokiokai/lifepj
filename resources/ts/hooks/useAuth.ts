@@ -54,6 +54,7 @@ export const useAuth = () => {
       localStorage.removeItem("loginUser");
 
       localStorage.removeItem("token");
+      
       setLoginUser(null);
 
       showMessage({ title: "ログアウトしました", status: "success" });

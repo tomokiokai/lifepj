@@ -46,9 +46,11 @@ export const Header = () => {
           </Heading>
         </Flex>
         <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
-          <Box pr={4}>
-            <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
-          </Box>
+          {loginUser && (loginUser.role === 2 || loginUser.role === 3) && (
+            <Box pr={4}>
+              <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
+            </Box>
+          )}
           <Link onClick={onClickSetting}>設定</Link>
         </Flex>
         <Box>

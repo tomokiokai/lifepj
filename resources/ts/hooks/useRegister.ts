@@ -21,7 +21,7 @@ export const useRegister = () => {
       })
       .then((res) => {
         if (res.data) {
-          showMessage({ title: "新規登録が完了しました", status: "success" });
+          showMessage({ title: "アカウントの認証メールを送信しました。", status: "success" });
           navigate("/");
         } else {
           showMessage({ title: "新規登録に失敗しました", status: "error" });

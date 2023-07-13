@@ -22,6 +22,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'name',
         'email',
         'password',
+        'role',
         'verification_code',
         'is_verified',
     ];
@@ -64,4 +65,22 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return [];
     }
+
+    // Role checking methods
+
+    public function isUser()
+    {
+        return $this->role === 1;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 2;
+    }
+
+    public function isOwner()
+    {
+        return $this->role === 3;
+    }
 }
+
