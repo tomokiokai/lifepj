@@ -7,6 +7,7 @@ import qs from 'qs';
 import { useSetRecoilState } from 'recoil';
 import { loginUserState } from '../../store/userState';
 import { GoogleLoginButton } from "../atoms/button/GoogleLoginButton";
+import { useMessage } from "../../hooks/useMessage";
 
 
 type LoginProps = {
@@ -20,6 +21,7 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const setLoginUser = useSetRecoilState(loginUserState);
+  const { showMessage } = useMessage();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -85,16 +87,27 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
       return axios.post("/api/google-login", { googleToken: idToken });
     })
     .then(response => {
-      console.log(response);
-      localStorage.setItem('token', response.data.token);
-      // Handle response, possibly redirecting the user or showing a success message
-      setLoginUser(response.data.user);
-      navigate("/home");
-    })
+    console.log(response);
+    setLoginUser(response.data.user);
+
+    if (response.data.error) {
+        showMessage({ title: response.data.error, status: "error" });
+    } else if (!response.data.user?.is_verified) {
+        showMessage({ title: response.data.message, status: "info" });
+    } else {
+        localStorage.setItem('token', response.data.token);
+        showMessage({ title: "ログインしました", status: "success" });
+        navigate("/home");
+    }
+})
       .catch(error => {
       console.error(error.response.data);
       console.error(error);
       // Handle errors
+      if (!error.response || error.response.status === 500) {
+    // ここでは特に500エラー（サーバーエラー）の場合にメッセージを表示します。
+    showMessage({ title: "Server error occurred", status: "error" });
+  }
     });
 };
 
@@ -127,14 +140,7 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
           </PrimaryButton>
           {/* Google Login */}
           <GoogleLoginButton onClick={handleGoogleLogin} buttonText="Login with Google" />
-これで、ボタンのテキストが Login.tsx と Register.tsx の両方で異なることが確認できます。Register.tsx では "Register & Login with Google" と表示され、Login.tsx では "Login with Google" と表示されます。
-
-
-
-
-
-
-Regenerate response
+          Regenerate response
           <Flex align="center" justify="center">
             <Link to="/register">新規登録はこちら</Link>
           </Flex>

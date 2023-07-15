@@ -75,6 +75,11 @@ class AuthController extends Controller
                     ]);
                     // メールを送信して2段階認証を促す
                     Mail::to($user->email)->send(new VerificationCodeMailable($user->verification_code));
+                    // 返すレスポンスを作成
+                    return response()->json([
+                        'user' => $user,
+                        'message' => 'アカウントの認証メールを送信しました。',
+                    ]);
                 } catch (\Exception $e) {
                     // ここで例外をキャッチしてログに記録したり、エラーメッセージをクライアントに返したりします
                     Log::error('Failed to create user', ['error' => $e->getMessage()]);
@@ -85,7 +90,10 @@ class AuthController extends Controller
             // 2段階認証が有効かどうかチェック
             if (!$user->is_verified) {
                 // 2段階認証がまだ完了していない場合の処理
-                return response()->json(['error' => 'Please complete the two-factor authentication'], 401);
+                return response()->json([
+                    'user' => $user,
+                    'error' => 'メールによる2段階認証が完了してません'
+                ], 200);
             }
 
             // JWTトークンを生成します。
