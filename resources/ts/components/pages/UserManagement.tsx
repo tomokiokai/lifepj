@@ -30,7 +30,9 @@ export const UserManagement: FC = memo(() => {
   // 各ユーザーにランダムな画像のURLを割り当てる
   const usersWithRandomImage = useMemo(
     () =>
-      users.map((user) => ({
+      users
+        .filter((user) => user.role === 1)
+        .map((user) => ({
         ...user,
         imageUrl: getRandomImageUrl(),
       })),

@@ -7373,6 +7373,7 @@ var Login = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function (_
     }).then(function (response) {
       var _response$data$user;
       console.log(response);
+      localStorage.setItem('loginUser', JSON.stringify(response.data.user));
       setLoginUser(response.data.user);
       if (response.data.error) {
         showMessage({
@@ -7753,7 +7754,9 @@ var UserManagement = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(fu
 
   // 各ユーザーにランダムな画像のURLを割り当てる
   var usersWithRandomImage = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    return users.map(function (user) {
+    return users.filter(function (user) {
+      return user.role === 1;
+    }).map(function (user) {
       return _objectSpread(_objectSpread({}, user), {}, {
         imageUrl: getRandomImageUrl()
       });
@@ -7858,8 +7861,8 @@ var useAllUsers = function useAllUsers() {
     setUsers = _useState4[1];
   var getUsers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     setLoading(true);
-    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("https://jsonplaceholder.typicode.com/users").then(function (res) {
-      return setUsers(res.data);
+    axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("http://localhost:80/api/users").then(function (res) {
+      return setUsers(res.data.users);
     })["catch"](function () {
       showMessage({
         title: "ユーザー取得に失敗しました",

@@ -87,7 +87,8 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
       return axios.post("/api/google-login", { googleToken: idToken });
     })
     .then(response => {
-    console.log(response);
+      console.log(response);
+      localStorage.setItem('loginUser', JSON.stringify(response.data.user));
     setLoginUser(response.data.user);
 
     if (response.data.error) {

@@ -107,6 +107,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid Google token'], 401);
         }
     }
+
+    public function getUsers()
+    {
+        $users = User::all();
+        return response()->json(['users' => $users]);
+    }
 }
 
 
