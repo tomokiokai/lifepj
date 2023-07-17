@@ -6893,19 +6893,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/hooks/dist/chunk-CHB4ZXZG.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YTV6DHKL.mjs");
-/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-P74GIWPW.mjs");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/hooks/dist/chunk-CHB4ZXZG.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-MPFPK3CX.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-B2MGPQRJ.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-YTV6DHKL.mjs");
+/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-P74GIWPW.mjs");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var recoil__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! recoil */ "./node_modules/recoil/es/index.js");
 /* harmony import */ var _store_userState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../store/userState */ "./resources/ts/store/userState.ts");
 /* harmony import */ var _hooks_useAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../hooks/useAuth */ "./resources/ts/hooks/useAuth.ts");
 /* harmony import */ var _atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../atoms/button/MenuIconButton */ "./resources/ts/components/atoms/button/MenuIconButton.tsx");
 /* harmony import */ var _molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../molecules/MenuDrawer */ "./resources/ts/components/molecules/MenuDrawer.tsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _assets_images_HeaderBack_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../assets/images/HeaderBack.jpg */ "./resources/ts/assets/images/HeaderBack.jpg");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -6920,11 +6922,11 @@ __webpack_require__.r(__webpack_exports__);
 var Header = function Header() {
   var setLoginUser = (0,recoil__WEBPACK_IMPORTED_MODULE_1__.useSetRecoilState)(_store_userState__WEBPACK_IMPORTED_MODULE_2__.loginUserState);
   var loginUser = (0,recoil__WEBPACK_IMPORTED_MODULE_1__.useRecoilValue)(_store_userState__WEBPACK_IMPORTED_MODULE_2__.loginUserState);
-  var _useDisclosure = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_7__.useDisclosure)(),
+  var _useDisclosure = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_8__.useDisclosure)(),
     isOpen = _useDisclosure.isOpen,
     onOpen = _useDisclosure.onOpen,
     onClose = _useDisclosure.onClose;
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useNavigate)();
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useNavigate)();
   var _useAuth = (0,_hooks_useAuth__WEBPACK_IMPORTED_MODULE_3__.useAuth)(),
     logout = _useAuth.logout;
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -6946,10 +6948,9 @@ var Header = function Header() {
     logout();
     localStorage.removeItem("loginUser"); // ローカルストレージからユーザー情報を削除
   }, [logout]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Flex, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Flex, {
       as: "nav",
-      bg: "green.300",
       color: "gray.50",
       align: "center",
       justify: "space-between",
@@ -6957,7 +6958,11 @@ var Header = function Header() {
         base: 3,
         md: 5
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Flex, {
+      style: {
+        backgroundImage: "url(".concat(_assets_images_HeaderBack_jpg__WEBPACK_IMPORTED_MODULE_6__["default"], ")"),
+        backgroundSize: 'cover'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Flex, {
         align: "center",
         as: "a",
         mr: 8,
@@ -6965,15 +6970,16 @@ var Header = function Header() {
           cursor: "pointer"
         },
         onClick: onClickHome,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Heading, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Heading, {
           as: "h1",
           fontSize: {
             base: "md",
             md: "lg"
           },
+          fontFamily: "body",
           children: "\u9867\u5BA2\u7BA1\u7406\u30A2\u30D7\u30EA"
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_9__.Flex, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_10__.Flex, {
         align: "center",
         fontSize: "sm",
         flexGrow: 2,
@@ -6981,32 +6987,32 @@ var Header = function Header() {
           base: "none",
           md: "flex"
         },
-        children: [loginUser && (loginUser.role === 2 || loginUser.role === 3) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Box, {
+        children: [loginUser && (loginUser.role === 2 || loginUser.role === 3) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Box, {
           pr: 4,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Link, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__.Link, {
             onClick: onClickUserManagement,
             children: "\u30E6\u30FC\u30B6\u30FC\u4E00\u89A7"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Link, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__.Link, {
           onClick: onClickSetting,
           children: "\u8A2D\u5B9A"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_11__.Box, {
-        children: [loginUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__.Text, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Box, {
+        children: [loginUser && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_14__.Text, {
           display: {
             base: "none",
             md: "block"
           },
           mr: 2,
           children: ["\u3053\u3093\u306B\u3061\u306F", loginUser.name, "\u3055\u3093"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_12__.Link, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_13__.Link, {
           onClick: handleLogout,
           children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_4__.MenuIconButton, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_atoms_button_MenuIconButton__WEBPACK_IMPORTED_MODULE_4__.MenuIconButton, {
         onOpen: onOpen
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_5__.MenuDrawer, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_molecules_MenuDrawer__WEBPACK_IMPORTED_MODULE_5__.MenuDrawer, {
       onClose: onClose,
       isOpen: isOpen,
       onClickHome: onClickHome,
@@ -8462,6 +8468,11 @@ var theme = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_0__.extendTheme)({
         color: "gray.800"
       }
     }
+  },
+  fonts: {
+    heading: "Palette Mosaic, sans-serif",
+    body: "Palette Mosaic, sans-serif",
+    mono: "Menlo, monospace"
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (theme);
@@ -10625,6 +10636,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/GoogleLogo.svg?efa560d32653a615a1db742bbf78c815");
+
+/***/ }),
+
+/***/ "./resources/ts/assets/images/HeaderBack.jpg":
+/*!***************************************************!*\
+  !*** ./resources/ts/assets/images/HeaderBack.jpg ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/HeaderBack.jpg?a5b9b78ec6f62047b51a8898909c780f");
 
 /***/ }),
 

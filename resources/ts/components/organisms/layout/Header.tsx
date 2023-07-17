@@ -6,6 +6,7 @@ import { loginUserState } from '../../../store/userState';
 import { useAuth } from "../../../hooks/useAuth";
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
+import headerBackground from '../../../assets/images/HeaderBack.jpg';
 
 export const Header = () => {
   const setLoginUser = useSetRecoilState(loginUserState);
@@ -34,14 +35,14 @@ export const Header = () => {
     <>
       <Flex
         as="nav"
-        bg="green.300"
         color="gray.50"
         align="center"
         justify="space-between"
         padding={{ base: 3, md: 5 }}
+        style={{ backgroundImage: `url(${headerBackground})`, backgroundSize: 'cover' }}
       >
         <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome}>
-          <Heading as="h1" fontSize={{ base: "md", md: "lg" }}>
+          <Heading as="h1" fontSize={{ base: "md", md: "lg" }} fontFamily="body">
             顧客管理アプリ
           </Heading>
         </Flex>

@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "baseUrl": "./",
+    "typeRoots": ["./node_modules/@types", "./types"],
     "paths": {
       "@/*": ["resources/ts/*"]
     }
