@@ -42,17 +42,17 @@ export const Header = () => {
         style={{ backgroundImage: `url(${headerBackground})`, backgroundSize: 'cover' }}
       >
         <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome}>
-          <Heading as="h1" fontSize={{ base: "md", md: "lg" }} fontFamily="body">
-            顧客管理アプリ
+          <Heading as="h1" fontSize={{ base: "3xl", md: "4xl" }} fontFamily="body" color="green.300">
+            Life
           </Heading>
         </Flex>
-        <Flex align="center" fontSize="sm" flexGrow={2} display={{ base: "none", md: "flex" }}>
+        <Flex align="center" fontSize="xl" flexGrow={2} display={{ base: "none", md: "flex" }}>
           {loginUser && (loginUser.role === 2 || loginUser.role === 3) && (
             <Box pr={4}>
-              <Link onClick={onClickUserManagement}>ユーザー一覧</Link>
+              <Link color="black" onClick={onClickUserManagement}>Users</Link>
             </Box>
           )}
-          <Link onClick={onClickSetting}>設定</Link>
+          <Link color="black" onClick={onClickSetting}>Setting</Link>
         </Flex>
         <Box>
           {loginUser && (

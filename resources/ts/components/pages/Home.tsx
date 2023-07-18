@@ -1,5 +1,6 @@
 import { FC, memo, useState, useEffect } from "react";
 import { Box, Image } from "@chakra-ui/react";
+import { RainbowHeading } from "../atoms/RainbowHeading";
 
 const images = [
   "https://source.unsplash.com/VjRpkGtS55w",
@@ -46,9 +47,9 @@ export const Home: FC = memo(() => {
         transform="translate(-50%, -50%)"
         textAlign="center"
       >
-        <h1 style={{ fontSize: "48px", color: "white" }}>Welcome to Cadenza Salon</h1>
-        <p style={{ fontSize: "24px", color: "white" }}>Discover the art of beauty and relaxation</p>
-      </Box>
+        <RainbowHeading style={{ fontSize: "48px" }}>Welcome to Cadenza Salon</RainbowHeading>
+  <p style={{ fontSize: "24px", color: "white" }}>Discover the art of beauty and relaxation</p>
+</Box>
     </Box>
   );
 });
