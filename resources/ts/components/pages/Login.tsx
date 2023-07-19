@@ -143,7 +143,7 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
           <GoogleLoginButton onClick={handleGoogleLogin} buttonText="Login with Google" />
           Regenerate response
           <Flex align="center" justify="center">
-            <Link to="/register">新規登録はこちら</Link>
+            <Link to="/register">Registerはこちら</Link>
           </Flex>
         </Stack>
       </Box>

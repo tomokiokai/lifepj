@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from "react";
-import { Box, Flex, Heading, Link, useDisclosure, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, useDisclosure, Text, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { loginUserState } from '../../../store/userState';
@@ -7,6 +7,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { MenuIconButton } from "../../atoms/button/MenuIconButton";
 import { MenuDrawer } from "../../molecules/MenuDrawer";
 import headerBackground from '../../../assets/images/HeaderBack.jpg';
+import logoImage from '../../../assets/images/Logo.jpg';
 
 export const Header = () => {
   const setLoginUser = useSetRecoilState(loginUserState);
@@ -35,13 +36,22 @@ export const Header = () => {
     <>
       <Flex
         as="nav"
+        backgroundColor="rgba(128, 128, 128, 0.5)"  // 半透明のグレーに変更
         color="gray.50"
         align="center"
         justify="space-between"
         padding={{ base: 3, md: 5 }}
-        style={{ backgroundImage: `url(${headerBackground})`, backgroundSize: 'cover' }}
+        position="sticky"
+        top="0"
+        zIndex="1000"
       >
         <Flex align="center" as="a" mr={8} _hover={{ cursor: "pointer" }} onClick={onClickHome}>
+          <Image 
+            src={logoImage} 
+            boxSize="50px"
+            borderRadius="full"
+            mr={2}
+          />
           <Heading as="h1" fontSize={{ base: "3xl", md: "4xl" }} fontFamily="body" color="green.300">
             Life
           </Heading>
@@ -49,10 +59,10 @@ export const Header = () => {
         <Flex align="center" fontSize="xl" flexGrow={2} display={{ base: "none", md: "flex" }}>
           {loginUser && (loginUser.role === 2 || loginUser.role === 3) && (
             <Box pr={4}>
-              <Link color="black" onClick={onClickUserManagement}>Users</Link>
+              <Link onClick={onClickUserManagement}>Users</Link>
             </Box>
           )}
-          <Link color="black" onClick={onClickSetting}>Setting</Link>
+          <Link onClick={onClickSetting}>Setting</Link>
         </Flex>
         <Box>
           {loginUser && (

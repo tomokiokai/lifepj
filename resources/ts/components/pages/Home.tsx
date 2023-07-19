@@ -1,6 +1,7 @@
 import { FC, memo, useState, useEffect } from "react";
 import { Box, Image } from "@chakra-ui/react";
 import { RainbowHeading } from "../atoms/RainbowHeading";
+import { BubbleImages } from '../organisms/BubbleImages';
 
 const images = [
   "https://source.unsplash.com/VjRpkGtS55w",
@@ -29,17 +30,8 @@ export const Home: FC = memo(() => {
       alignItems="center"
       position="relative"
     >
-      <Image
-        src={images[currentImageIndex]}
-        alt="Top Image"
-        objectFit="cover"
-        width="100%"
-        height="100%"
-        position="absolute"
-        top={0}
-        left={0}
-        zIndex={-1}
-      />
+      <BubbleImages /> {/* ここでBubbleImagesコンポーネントを使用 */}
+      
       <Box
         position="absolute"
         top="50%"
