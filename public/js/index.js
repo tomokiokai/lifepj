@@ -6934,7 +6934,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/layout/dist/chunk-6CSUKJP7.mjs");
 /* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @chakra-ui/react */ "./node_modules/@chakra-ui/image/dist/chunk-SMHKDLMK.mjs");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 var _templateObject, _templateObject2;
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -6950,41 +6956,50 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 var imageUrls = Array.from({
-  length: 700
+  length: 10
 }, function (_, i) {
   return "https://source.unsplash.com/random/100x100?sig=".concat(i + 1);
 });
-var bubbleAppear = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_2__.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0% { opacity: 0; }\n  100% { opacity: 1; }\n"])));
-var bubbleFloat = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_2__.keyframes)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  0% { transform: translateY(0); }\n  100% { transform: translateY(-100vh); opacity: 1; }\n"])));
+var bubbleAppear = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_2__.keyframes)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  0% { opacity: 0; }\n  50% { opacity: 0.5; }\n  100% { opacity: 1; }\n"])));
+var bubbleFloat = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_2__.keyframes)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  0% { transform: translate(0, 0); }\n  50% { transform: translate(10vw, -50vh); }\n  100% { transform: translate(0, -100vh); }\n"])));
 function generateInitialState() {
-  return imageUrls.map(function () {
-    var size = Math.random() * 100 + 100; // Size is between 100 and 200
-    var x = Math.random() * (100 - size / window.innerWidth * 100); // x position is adjusted based on size
+  return imageUrls.map(function (_, i) {
+    var size = Math.random() * 100 + 100;
+    var x = Math.random() * (100 - size / window.innerWidth * 100);
     return {
       x: x,
       y: 0,
       size: size,
-      delay: Math.random() * 10,
-      speed: Math.random() * 30 + 20
+      delay: i * 2,
+      // stagger start times
+      speed: Math.random() * 30 + 20,
+      opacity: 0 // initially set opacity to 0
     };
   });
 }
+
 var BubbleImages = function BubbleImages() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(generateInitialState()),
     _useState2 = _slicedToArray(_useState, 2),
     state = _useState2[0],
     setState = _useState2[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var interval = setInterval(function () {
-      // Update the state to generate new bubbles after the longest animation has ended
-      setState(generateInitialState());
-    }, Math.max.apply(Math, _toConsumableArray(state.map(function (_ref) {
+    var intervals = state.map(function (_ref, i) {
       var speed = _ref.speed,
         delay = _ref.delay;
-      return speed + delay;
-    }))) * 1000);
+      return setInterval(function () {
+        setState(function (prevState) {
+          var newState = _toConsumableArray(prevState);
+          newState[i] = _objectSpread(_objectSpread({}, newState[i]), {}, {
+            delay: 0,
+            opacity: 1
+          }); // make bubble visible after its delay
+          return newState;
+        });
+      }, (speed + delay) * 1000);
+    });
     return function () {
-      return clearInterval(interval);
+      return intervals.forEach(clearInterval);
     };
   }, [state]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_3__.Box, {
@@ -6996,7 +7011,8 @@ var BubbleImages = function BubbleImages() {
         y = _ref2.y,
         size = _ref2.size,
         delay = _ref2.delay,
-        speed = _ref2.speed;
+        speed = _ref2.speed,
+        opacity = _ref2.opacity;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_4__.Image, {
         src: imageUrls[i],
         position: "absolute",
@@ -7004,7 +7020,9 @@ var BubbleImages = function BubbleImages() {
         bottom: "".concat(y, "%"),
         boxSize: "".concat(size, "px"),
         borderRadius: "full",
-        animation: "".concat(bubbleAppear, " 2s ease-out ").concat(delay, "s, \n                      ").concat(bubbleFloat, " ").concat(speed, "s linear ").concat(delay, "s infinite")
+        opacity: opacity // apply opacity property
+        ,
+        animation: "".concat(bubbleAppear, " 2s ease-out ").concat(delay, "s forwards, \n                      ").concat(bubbleFloat, " ").concat(speed, "s linear 0s infinite")
       }, i);
     })
   });
