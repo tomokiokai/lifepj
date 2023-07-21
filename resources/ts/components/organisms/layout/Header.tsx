@@ -26,6 +26,7 @@ export const Header = () => {
   const onClickHome = useCallback(() => navigate("/home"), [navigate]);
   const onClickUserManagement = useCallback(() => navigate("/home/user_management"), [navigate]);
   const onClickSetting = useCallback(() => navigate("/home/setting"), [navigate]);
+  const onClickShopManagement = useCallback(() => navigate("/home/shop_management"), [navigate]); // 新しいShopManagementへのリンク
 
   const handleLogout = useCallback(() => {
     logout();
@@ -62,7 +63,8 @@ export const Header = () => {
               <Link onClick={onClickUserManagement}>Users</Link>
             </Box>
           )}
-          <Link onClick={onClickSetting}>Setting</Link>
+          
+          <Link onClick={onClickShopManagement}>Shop</Link>
         </Flex>
         <Box>
           {loginUser && (
@@ -74,7 +76,7 @@ export const Header = () => {
         </Box>
         <MenuIconButton onOpen={onOpen} />
       </Flex>
-      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickSetting={onClickSetting} />
+      <MenuDrawer onClose={onClose} isOpen={isOpen} onClickHome={onClickHome} onClickUserManagement={onClickUserManagement} onClickSetting={onClickSetting} onClickShopManagement={onClickShopManagement} /> {/* 新しいShopManagementへのリンク */}
     </>
   );
 };

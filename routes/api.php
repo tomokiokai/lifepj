@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,5 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/google-login', [AuthController::class, 'googleLogin']);
 Route::get('/users', [AuthController::class, 'getUsers']);
-
+Route::get('/shops', [ShopController::class, 'index']);
 

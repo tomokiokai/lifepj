@@ -1,8 +1,8 @@
 import { Home } from "../components/pages/Home";
-import { Setting } from "../components/pages/Setting";
 import { UserManagement } from "../components/pages/UserManagement";
+import { ShopManagement } from "../components/pages/ShopManagement"; 
 
-export  const homeRoutes = [
+export const homeRoutes = [
   {
     path: "",
     element: <Home />
@@ -12,7 +12,7 @@ export  const homeRoutes = [
     element: <UserManagement />
   },
   {
-    path: "setting",
-    element: <Setting />
+    path: "shop_management", 
+    element: <ShopManagement />
   },
 ];
