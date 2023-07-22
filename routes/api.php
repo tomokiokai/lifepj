@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ShopController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceTypeController;
+use App\Http\Controllers\ServicePriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +24,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/google-login', [AuthController::class, 'googleLogin']);
 Route::get('/users', [AuthController::class, 'getUsers']);
 Route::get('/shops', [ShopController::class, 'index']);
-Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/service_types', [ServiceTypeController::class, 'index']);
+Route::get('/service_prices', [ServicePriceController::class, 'index']);
 

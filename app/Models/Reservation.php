@@ -16,7 +16,6 @@ class Reservation extends Model
         'children',
         'user_id',
         'shop_id',
-        'service_id',
     ];
 
     public function user()
@@ -29,9 +28,15 @@ class Reservation extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function service()
+    public function adultServiceTypes()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(ServiceType::class, 'adult_reservations_service_types');
+    }
+
+    public function childrenServiceTypes()
+    {
+        return $this->belongsToMany(ServiceType::class, 'children_reservations_service_types');
     }
 }
+
 

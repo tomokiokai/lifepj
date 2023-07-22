@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('service_prices', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('date');
-            $table->string('time');
-            $table->integer('adults')->default(0);
-            $table->integer('children')->default(0);
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('shop_id')->constrained()->onDelete('cascade');
+            $table->foreignId('service_type_id')->constrained()->onDelete('cascade');
+            $table->float('adult_price');
+            $table->float('children_price');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('service_prices');
     }
 };
