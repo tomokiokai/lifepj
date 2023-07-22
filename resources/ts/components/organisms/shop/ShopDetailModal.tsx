@@ -1,6 +1,9 @@
-import { FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, } from "@chakra-ui/react";
-import { FC, memo } from "react";
+import { useState,useEffect } from "react";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Stack, } from "@chakra-ui/react";
 import { Shop } from "../../../types/api/shop";
+import { FC, memo } from "react";
+import { Service } from "../../../types/api/service"; 
+import { useAllServices } from "../../../hooks/useAllServices";
 
 type Props = {
   shop: Shop | null;
@@ -10,6 +13,24 @@ type Props = {
 
 export const ShopDetailModal: FC<Props> = memo((props) => {
   const { shop, isOpen, onClose } = props;
+  const { getServices, services } = useAllServices();
+
+  useEffect(() => {
+    getServices(); // 初期読み込み時にサービスを取得する
+  }, [getServices]);
+
+  const [date, setDate] = useState("");  // State for reservation date
+  const [time, setTime] = useState("");  // State for reservation time
+  const [adults, setAdults] = useState(0);  // State for number of adults
+  const [children, setChildren] = useState(0);  // State for number of children
+  const [service, setService] = useState<number | null>(null);  // State for selected service
+  const [quantity, setQuantity] = useState(0);  // State for quantity of service
+
+  // This function should make an API call to submit the reservation
+  const handleReserve = () => {
+    // Call API to make reservation
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -23,25 +44,42 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
         <ModalCloseButton />
         <ModalBody mx={4}>
           <Stack spacing={4}>
+            {/* Existing form fields... */}
             <FormControl>
-              <FormLabel>ショップ名</FormLabel>
-              <Input value={shop?.name} isReadOnly />
+              <FormLabel>予約日</FormLabel>
+              <Input value={date} onChange={(e) => setDate(e.target.value)} />
             </FormControl>
             <FormControl>
-              <FormLabel>場所</FormLabel>
-              <Input value={shop?.location} isReadOnly />
+              <FormLabel>時間</FormLabel>
+              <Input value={time} onChange={(e) => setTime(e.target.value)} />
             </FormControl>
             <FormControl>
-              <FormLabel>カテゴリ</FormLabel>
-              <Input value={shop?.category} isReadOnly />
+              <FormLabel>大人の数</FormLabel>
+              <Input value={adults} onChange={(e) => setAdults(Number(e.target.value))} />
             </FormControl>
             <FormControl>
-              <FormLabel>説明</FormLabel>
-              <Input value={shop?.description} isReadOnly />
+              <FormLabel>子供の数</FormLabel>
+              <Input value={children} onChange={(e) => setChildren(Number(e.target.value))} />
             </FormControl>
+            <FormControl>
+              <FormLabel>サービス</FormLabel>
+              <Select onChange={(e) => setService(Number(e.target.value))}>
+                {services.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel>サービスの数</FormLabel>
+              <Input value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
+            </FormControl>
+            <Button onClick={handleReserve}>予約</Button>
           </Stack>
         </ModalBody>
       </ModalContent>
     </Modal>
   );
 });
+
