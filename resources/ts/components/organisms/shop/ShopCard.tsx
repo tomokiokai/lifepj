@@ -24,7 +24,7 @@ export const ShopCard: FC<Props> = memo((props) => {
   return (
     <Box
       w="260px"
-      h="320px"
+      h="380px"
       bg="white"
       borderRadius="10px"
       shadow="md"

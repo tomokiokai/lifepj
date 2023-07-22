@@ -13,7 +13,7 @@ const theme = extendTheme({
   },
   fonts: {
     heading: "Palette Mosaic, sans-serif",
-    body: "Palette Mosaic, sans-serif",
+    body: "Sawarabi Mincho, sans-serif",
     mono: "Menlo, monospace",
   },
   

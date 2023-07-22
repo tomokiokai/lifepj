@@ -7220,7 +7220,7 @@ var ShopCard = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(function
     _onClick = props.onClick;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_2__.Box, {
     w: "260px",
-    h: "320px",
+    h: "380px",
     bg: "white",
     borderRadius: "10px",
     shadow: "md",
@@ -8976,7 +8976,7 @@ var theme = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__.extendTheme)({
   },
   fonts: {
     heading: "Palette Mosaic, sans-serif",
-    body: "Palette Mosaic, sans-serif",
+    body: "Sawarabi Mincho, sans-serif",
     mono: "Menlo, monospace"
   }
 });
