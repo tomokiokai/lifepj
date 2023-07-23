@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Stack, } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Stack, Flex, Grid, Box} from "@chakra-ui/react";
 import { Shop } from "../../../types/api/shop";
 import { FC, memo } from "react";
 import { ServiceType } from "../../../types/api/serviceType"; 
@@ -39,6 +39,7 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
   const [servicePriceChildren, setServicePriceChildren] = useState<number | null>(null);
   const [adultTotal, setAdultTotal] = useState(0);
   const [childTotal, setChildTotal] = useState(0);
+  const [selectedPersonType, setSelectedPersonType] = useState('');
 
   useEffect(() => {
     if (serviceTypeAdult) {
@@ -69,33 +70,59 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      autoFocus={false}
-      motionPreset="slideInBottom"
-    >
-      <ModalOverlay />
-      <ModalContent pb={6}>
-        <ModalHeader>ショップ詳細</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody mx={4}>
-          <Stack spacing={4}>
+  <Modal
+  isOpen={isOpen}
+  onClose={onClose}
+  autoFocus={false}
+  motionPreset="slideInBottom"
+>
+  <ModalOverlay />
+  <ModalContent pb={6} maxW="4xl">
+    <ModalHeader>ショップ詳細</ModalHeader>
+    <ModalCloseButton />
+    <ModalBody mx={4}>
+      <Stack spacing={6}>
+        <FormControl>
+          <FormLabel>予約日</FormLabel>
+          <Input value={date} onChange={(e) => setDate(e.target.value)} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>時間</FormLabel>
+          <Input value={time} onChange={(e) => setTime(e.target.value)} />
+        </FormControl>
+
+        <Stack spacing={8}>
+          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+            <Box><FormLabel></FormLabel></Box>
             <FormControl>
-              <FormLabel>予約日</FormLabel>
-              <Input value={date} onChange={(e) => setDate(e.target.value)} />
+              <FormLabel>人数</FormLabel>
             </FormControl>
             <FormControl>
-              <FormLabel>時間</FormLabel>
-              <Input value={time} onChange={(e) => setTime(e.target.value)} />
+              <FormLabel>サービスタイプ</FormLabel>
             </FormControl>
             <FormControl>
-              <FormLabel>大人の数</FormLabel>
-              <Input value={adults} onChange={(e) => setAdults(Number(e.target.value))} />
+              <FormLabel>サービス価格</FormLabel>
             </FormControl>
             <FormControl>
-              <FormLabel>大人のサービスタイプ</FormLabel>
-              <Select isDisabled={isLoading} onChange={(e) => setServiceTypeAdult(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
+              <FormLabel>合計</FormLabel>
+            </FormControl>
+          </Grid>
+
+          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+            <Box><FormLabel>大人</FormLabel></Box>
+            <FormControl>
+  <Select value={adults} onChange={(e) => setAdults(Number(e.target.value))}>
+  <option value="0" disabled>0</option>
+  {[1, 2, 3, 4, 5].map((num) => (
+    <option key={num} value={num}>
+      {num}
+    </option>
+  ))}
+  </Select>
+</FormControl>
+            <FormControl>
+              <Select isDisabled={isLoading} value={serviceTypeAdult?.id || ''} onChange={(e) => setServiceTypeAdult(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
+                <option value="" disabled>選択してください</option>
                 {serviceTypes.map((serviceType) => (
                   <option key={serviceType.id} value={serviceType.id}>
                     {serviceType.name}
@@ -103,23 +130,29 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
                 ))}
               </Select>
             </FormControl>
-            {servicePriceAdult && (
-              <FormControl>
-                <FormLabel>大人のサービス価格</FormLabel>
-                <Input value={servicePriceAdult} readOnly />
-              </FormControl>
-            )}
             <FormControl>
-              <FormLabel>大人の合計</FormLabel>
+              <Input value={servicePriceAdult} readOnly />
+            </FormControl>
+            <FormControl>
               <Input value={adultTotal} readOnly />
             </FormControl>
+          </Grid>
+
+          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+            <Box><FormLabel>子供</FormLabel></Box>
             <FormControl>
-              <FormLabel>子供の数</FormLabel>
-              <Input value={children} onChange={(e) => setChildren(Number(e.target.value))} />
-            </FormControl>
+  <Select value={children} onChange={(e) => setChildren(Number(e.target.value))}>
+  <option value="0" disabled>0</option>
+  {[1, 2, 3, 4, 5].map((num) => (
+    <option key={num} value={num}>
+      {num}
+    </option>
+  ))}
+  </Select>
+</FormControl>
             <FormControl>
-              <FormLabel>子供のサービスタイプ</FormLabel>
-              <Select isDisabled={isLoading} onChange={(e) => setServiceTypeChildren(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
+              <Select isDisabled={isLoading} value={serviceTypeChildren?.id || ''} onChange={(e) => setServiceTypeChildren(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
+                <option value="" disabled>選択してください</option>
                 {serviceTypes.map((serviceType) => (
                   <option key={serviceType.id} value={serviceType.id}>
                     {serviceType.name}
@@ -127,21 +160,31 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
                 ))}
               </Select>
             </FormControl>
-            {servicePriceChildren && (
-              <FormControl>
-                <FormLabel>子供のサービス価格</FormLabel>
-                <Input value={servicePriceChildren} readOnly />
-              </FormControl>
-            )}
             <FormControl>
-              <FormLabel>子供の合計</FormLabel>
+              <Input value={servicePriceChildren} readOnly />
+            </FormControl>
+            <FormControl>
               <Input value={childTotal} readOnly />
             </FormControl>
-            <Button onClick={handleReserve}>予約</Button>
-          </Stack>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
-  );
+          </Grid>
+
+          <Grid templateColumns="repeat(5, 1fr)" gap={6}>
+            <Box><FormLabel>合計</FormLabel></Box>
+            <Box></Box>
+            <Box></Box>
+            <Box></Box>
+            <FormControl>
+              <Input value={adultTotal + childTotal} readOnly />
+            </FormControl>
+          </Grid>
+        </Stack>
+
+        <Button onClick={handleReserve}>予約</Button>
+      </Stack>
+    </ModalBody>
+  </ModalContent>
+</Modal>
+
+);
 });
 
