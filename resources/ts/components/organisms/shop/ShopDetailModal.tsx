@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Stack, Flex, Grid, Box} from "@chakra-ui/react";
+import { useState, useEffect, useMemo } from "react";
+import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, Stack, Flex, Grid, Box } from "@chakra-ui/react";
 import { Shop } from "../../../types/api/shop";
 import { FC, memo } from "react";
 import { ServiceType } from "../../../types/api/serviceType"; 
@@ -7,6 +7,7 @@ import { useServiceTypes } from "../../../hooks/useServiceTypes";
 import { useServicePrices } from "../../../hooks/useServicePrices";
 import { ServicePrice } from "../../../types/api/servicePrice";
 import { useReserve } from '../../../hooks/useReserve';
+import { useAllReservations } from '../../../hooks/useAllReservations';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -40,6 +41,29 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
   const [childTotal, setChildTotal] = useState(0);
   const { handleReserve } = useReserve();
   const [selectedPersonType, setSelectedPersonType] = useState('');
+  const { getReservations, reservations } = useAllReservations();
+
+  // Filter reservations for the selected shop and date
+  const filteredReservations = useMemo(() => {
+    return reservations.filter(reservation =>
+      reservation.shop_id === shop?.id && 
+      reserveDate?.getDate() === new Date(reservation.date).getDate() &&
+      reserveDate?.getMonth() === new Date(reservation.date).getMonth() &&
+      reserveDate?.getFullYear() === new Date(reservation.date).getFullYear()
+    );
+  }, [reservations, shop?.id, reserveDate]);
+
+  // Convert reservation times to Date objects
+  const reservedTimes = useMemo(() =>
+  filteredReservations.map(reservation => {
+    const date = new Date(reservation.date);
+    const hours = Math.floor(reservation.time_slot / 2) + 10;
+    const minutes = (reservation.time_slot % 2) * 30;
+    date.setHours(hours);
+    date.setMinutes(minutes);
+    return date;
+  }),
+[filteredReservations]);
 
   useEffect(() => {
     const fetchServiceData = async () => {
@@ -74,6 +98,10 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
     }
   }, [adults, children, servicePriceAdult, servicePriceChildren]);
 
+   useEffect(() => {
+    getReservations();
+  }, [getReservations]);
+
   return (
   <Modal
   isOpen={isOpen}
@@ -95,21 +123,21 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
               dateFormat="yyyy/MM/dd"
             />
 </FormControl>
-         <FormControl>
-            <FormLabel>時間</FormLabel>
+        <FormControl>
+          <FormLabel>時間</FormLabel>
             <DatePicker
-  selected={time}
-  onChange={(date) => setTime(date)}
-  showTimeSelect
-  showTimeSelectOnly
-  timeIntervals={30}
-  timeCaption="Time"
-  dateFormat="h:mm aa"
-  minTime={new Date(currentDate.setHours(10,0))}
-  maxTime={new Date(currentDate.setHours(20,0))}
-/>
-          </FormControl>
-
+          selected={time}
+          onChange={(date) => setTime(date)}
+          showTimeSelect
+          showTimeSelectOnly
+          timeIntervals={30}
+          timeCaption="Time"
+          dateFormat="h:mm aa"
+          minTime={new Date(currentDate.setHours(10,0))}
+          maxTime={new Date(currentDate.setHours(20,0))}
+          excludeTimes={reservedTimes}  // Exclude reserved times
+        />
+        </FormControl>
         <Stack spacing={8}>
           <Grid templateColumns="repeat(5, 1fr)" gap={6}>
             <Box><FormLabel></FormLabel></Box>
@@ -207,14 +235,10 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
     console.error("Shop ID is undefined");
   }
 }}>予約</Button>
-
-
-
       </Stack>
     </ModalBody>
   </ModalContent>
 </Modal>
-
 );
 });
 

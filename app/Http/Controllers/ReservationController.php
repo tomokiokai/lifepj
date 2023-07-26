@@ -7,6 +7,12 @@ use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
+    public function index()
+    {
+        $reservations = Reservation::all();
+        return response()->json(['reservations' => $reservations], 200);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

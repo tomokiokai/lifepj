@@ -30,15 +30,6 @@ class Reservation extends Model
         return $this->belongsTo(Shop::class);
     }
 
-    public function adultServiceTypes()
-    {
-        return $this->belongsToMany(ServiceType::class, 'adult_reservations_service_types');
-    }
-
-    public function childrenServiceTypes()
-    {
-        return $this->belongsToMany(ServiceType::class, 'children_reservations_service_types');
-    }
     public function serviceTypeAdult()
     {
         return $this->belongsTo(ServiceType::class, 'service_type_adult');
@@ -49,3 +40,4 @@ class Reservation extends Model
         return $this->belongsTo(ServiceType::class, 'service_type_children');
     }
 }
+

@@ -27,5 +27,6 @@ Route::get('/users', [AuthController::class, 'getUsers']);
 Route::get('/shops', [ShopController::class, 'index']);
 Route::get('/service_types', [ServiceTypeController::class, 'index']);
 Route::get('/service_prices', [ServicePriceController::class, 'index']);
+Route::get('/reservations', [ReservationController::class, 'index']);
 Route::post('/reservations', [ReservationController::class, 'store']);
 
