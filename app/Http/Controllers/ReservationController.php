@@ -18,13 +18,17 @@ class ReservationController extends Controller
         $request->validate([
             'date' => 'required|date',
             'time_slot' => 'required|integer',
-            'adults' => 'required|integer',
-            'children' => 'required|integer',
+            'adults' => 'nullable|integer',
+            'children' => 'nullable|integer',
             'user_id' => 'required|integer',
-            'service_type_adult' => 'required|integer',
-            'service_type_children' => 'required|integer',
+            'service_type_adult' => 'nullable|integer',
+            'service_type_children' => 'nullable|integer',
             'shop_id' => 'required|integer',
         ]);
+
+        if ($request->adults == 0 && $request->children == 0) {
+            return response()->json(['message' => 'At least one adult or child must be reserved.'], 422);
+        }
 
         $reservation = new Reservation;
         $reservation->date = $request->date;
@@ -40,4 +44,5 @@ class ReservationController extends Controller
 
         return response()->json(['message' => 'Reservation created successfully.'], 200);
     }
+
 }

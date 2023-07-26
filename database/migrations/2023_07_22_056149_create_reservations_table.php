@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->timestamp('date');
             $table->integer('time_slot'); // 1 for 10:00-10:30, 2 for 10:30-11:00, etc.
-            $table->integer('adults')->default(0);
-            $table->integer('children')->default(0);
+            $table->integer('adults')->default(0)->nullable();  // <-- make this nullable
+            $table->integer('children')->default(0)->nullable();  // <-- make this nullable
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('shop_id')->constrained()->onDelete('cascade');
-            $table->foreignId('service_type_adult')->constrained('service_types')->onDelete('cascade');
-            $table->foreignId('service_type_children')->constrained('service_types')->onDelete('cascade');
+            $table->foreignId('service_type_adult')->nullable()->constrained('service_types')->onDelete('cascade');
+            $table->foreignId('service_type_children')->nullable()->constrained('service_types')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -37,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('reservations');
     }
 };
+

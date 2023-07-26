@@ -8,6 +8,7 @@ import { useServicePrices } from "../../../hooks/useServicePrices";
 import { ServicePrice } from "../../../types/api/servicePrice";
 import { useReserve } from '../../../hooks/useReserve';
 import { useAllReservations } from '../../../hooks/useAllReservations';
+import { useMessage } from '../../../hooks/useMessage';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -42,6 +43,7 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
   const { handleReserve } = useReserve();
   const [selectedPersonType, setSelectedPersonType] = useState('');
   const { getReservations, reservations } = useAllReservations();
+  const { showMessage } = useMessage();
 
   // Filter reservations for the selected shop and date
   const filteredReservations = useMemo(() => {
@@ -98,7 +100,7 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
     }
   }, [adults, children, servicePriceAdult, servicePriceChildren]);
 
-   useEffect(() => {
+  useEffect(() => {
     getReservations();
   }, [getReservations]);
 
@@ -228,13 +230,19 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
         </Stack>
 
          <Button onClick={() => {
-  if (shop?.id !== undefined) {
+  if (shop?.id !== undefined && (adults > 0 || children > 0)) {
     handleReserve(shop.id, reserveDate, time, adults, children, serviceTypeAdult, serviceTypeChildren)
-  } else {
+} else {
     // Show error message
-    console.error("Shop ID is undefined");
-  }
+    if (shop?.id === undefined) {
+      showMessage({ title: "Shop ID is undefined", status: "error" });
+    } 
+    if (adults === 0 && children === 0) {
+      showMessage({ title: "人数とサービスを選択して下さい", status: "error" });
+    }
+}
 }}>予約</Button>
+
       </Stack>
     </ModalBody>
   </ModalContent>
