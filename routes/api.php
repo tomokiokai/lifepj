@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\ServicePriceController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,5 @@ Route::get('/users', [AuthController::class, 'getUsers']);
 Route::get('/shops', [ShopController::class, 'index']);
 Route::get('/service_types', [ServiceTypeController::class, 'index']);
 Route::get('/service_prices', [ServicePriceController::class, 'index']);
+Route::post('/reservations', [ReservationController::class, 'store']);
 

@@ -6,6 +6,10 @@ import { ServiceType } from "../../../types/api/serviceType";
 import { useServiceTypes } from "../../../hooks/useServiceTypes";
 import { useServicePrices } from "../../../hooks/useServicePrices";
 import { ServicePrice } from "../../../types/api/servicePrice";
+import { useReserve } from '../../../hooks/useReserve';
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type Props = {
   shop: Shop | null;
@@ -20,17 +24,12 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchServiceData = async () => {
-      setIsLoading(true);
-      await Promise.all([getServiceTypes(), getServicePrices()]);
-      setIsLoading(false);
-    };
-    fetchServiceData();
-  }, [getServiceTypes, getServicePrices]);
-
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const currentDate = new Date();
+  const roundedCurrentTime = new Date(Math.ceil(currentDate.getTime() / (1000 * 60 * 30)) * (1000 * 60 * 30));
+  
+  const [reserveDate, setReserveDate] = useState<Date | null>(currentDate);
+  const [time, setTime] = useState<Date | null>(roundedCurrentTime);
+  
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [serviceTypeAdult, setServiceTypeAdult] = useState<ServiceType | null>(null);
@@ -39,8 +38,18 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
   const [servicePriceChildren, setServicePriceChildren] = useState<number | null>(null);
   const [adultTotal, setAdultTotal] = useState(0);
   const [childTotal, setChildTotal] = useState(0);
+  const { handleReserve } = useReserve();
   const [selectedPersonType, setSelectedPersonType] = useState('');
 
+  useEffect(() => {
+    const fetchServiceData = async () => {
+      setIsLoading(true);
+      await Promise.all([getServiceTypes(), getServicePrices()]);
+      setIsLoading(false);
+    };
+    fetchServiceData();
+  }, [getServiceTypes, getServicePrices]);
+  
   useEffect(() => {
     if (serviceTypeAdult) {
       const price = servicePrices.find(price => price.service_type_id === serviceTypeAdult.id);
@@ -65,10 +74,6 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
     }
   }, [adults, children, servicePriceAdult, servicePriceChildren]);
 
-  const handleReserve = () => {
-    // Call API to make reservation
-  };
-
   return (
   <Modal
   isOpen={isOpen}
@@ -83,13 +88,27 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
     <ModalBody mx={4}>
       <Stack spacing={6}>
         <FormControl>
-          <FormLabel>予約日</FormLabel>
-          <Input value={date} onChange={(e) => setDate(e.target.value)} />
-        </FormControl>
-        <FormControl>
-          <FormLabel>時間</FormLabel>
-          <Input value={time} onChange={(e) => setTime(e.target.value)} />
-        </FormControl>
+  <FormLabel>予約日</FormLabel>
+            <DatePicker
+              selected={reserveDate}
+              onChange={(date) => setReserveDate(date)}
+              dateFormat="yyyy/MM/dd"
+            />
+</FormControl>
+         <FormControl>
+            <FormLabel>時間</FormLabel>
+            <DatePicker
+  selected={time}
+  onChange={(date) => setTime(date)}
+  showTimeSelect
+  showTimeSelectOnly
+  timeIntervals={30}
+  timeCaption="Time"
+  dateFormat="h:mm aa"
+  minTime={new Date(currentDate.setHours(10,0))}
+  maxTime={new Date(currentDate.setHours(20,0))}
+/>
+          </FormControl>
 
         <Stack spacing={8}>
           <Grid templateColumns="repeat(5, 1fr)" gap={6}>
@@ -111,15 +130,15 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
           <Grid templateColumns="repeat(5, 1fr)" gap={6}>
             <Box><FormLabel>大人</FormLabel></Box>
             <FormControl>
-  <Select value={adults} onChange={(e) => setAdults(Number(e.target.value))}>
-  <option value="0" disabled>0</option>
-  {[1, 2, 3, 4, 5].map((num) => (
-    <option key={num} value={num}>
-      {num}
-    </option>
-  ))}
-  </Select>
-</FormControl>
+              <Select value={adults} onChange={(e) => setAdults(Number(e.target.value))}>
+                <option value="0" disabled>0</option>
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
             <FormControl>
               <Select isDisabled={isLoading} value={serviceTypeAdult?.id || ''} onChange={(e) => setServiceTypeAdult(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
                 <option value="" disabled>選択してください</option>
@@ -131,7 +150,8 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
               </Select>
             </FormControl>
             <FormControl>
-              <Input value={servicePriceAdult} readOnly />
+              <Input value={servicePriceAdult !== null ? servicePriceAdult : ''} readOnly />
+
             </FormControl>
             <FormControl>
               <Input value={adultTotal} readOnly />
@@ -141,15 +161,15 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
           <Grid templateColumns="repeat(5, 1fr)" gap={6}>
             <Box><FormLabel>子供</FormLabel></Box>
             <FormControl>
-  <Select value={children} onChange={(e) => setChildren(Number(e.target.value))}>
-  <option value="0" disabled>0</option>
-  {[1, 2, 3, 4, 5].map((num) => (
-    <option key={num} value={num}>
-      {num}
-    </option>
-  ))}
-  </Select>
-</FormControl>
+              <Select value={children} onChange={(e) => setChildren(Number(e.target.value))}>
+                <option value="0" disabled>0</option>
+                {[1, 2, 3, 4, 5].map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </Select>
+          </FormControl>
             <FormControl>
               <Select isDisabled={isLoading} value={serviceTypeChildren?.id || ''} onChange={(e) => setServiceTypeChildren(serviceTypes.find(serviceType => serviceType.id === Number(e.target.value)) || null)}>
                 <option value="" disabled>選択してください</option>
@@ -161,7 +181,7 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
               </Select>
             </FormControl>
             <FormControl>
-              <Input value={servicePriceChildren} readOnly />
+              <Input value={servicePriceChildren !== null ? servicePriceChildren : ''} readOnly />
             </FormControl>
             <FormControl>
               <Input value={childTotal} readOnly />
@@ -179,7 +199,17 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
           </Grid>
         </Stack>
 
-        <Button onClick={handleReserve}>予約</Button>
+         <Button onClick={() => {
+  if (shop?.id !== undefined) {
+    handleReserve(shop.id, reserveDate, time, adults, children, serviceTypeAdult, serviceTypeChildren)
+  } else {
+    // Show error message
+    console.error("Shop ID is undefined");
+  }
+}}>予約</Button>
+
+
+
       </Stack>
     </ModalBody>
   </ModalContent>

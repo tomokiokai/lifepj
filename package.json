@@ -40,8 +40,10 @@
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
         "@leecheuk/react-google-login": "^5.4.1",
+        "@types/react-datepicker": "^4.11.2",
         "framer-motion": "^10.12.17",
         "laravel-mix": "^6.0.49",
+        "react-datepicker": "^4.16.0",
         "react-scroll": "^1.8.9",
         "recoil": "^0.7.7",
         "web-vitals": "^3.3.2"
