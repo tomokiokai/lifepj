@@ -8,6 +8,7 @@ use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\ShopsTableSeeder;
 use Database\Seeders\ServiceTypeSeeder;
 use Database\Seeders\ServicePriceSeeder;
+use Database\Seeders\ReservationsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ShopsTableSeeder::class,
             ServiceTypeSeeder::class,
             ServicePriceSeeder::class,
+            ReservationsTableSeeder::class,
         ]);
     }
 }
