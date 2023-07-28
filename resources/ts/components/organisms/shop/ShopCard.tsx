@@ -1,7 +1,7 @@
 import { Box, Image, Stack, Text, VStack } from "@chakra-ui/react";
 import { FaHeart } from "react-icons/fa";
-import { FC, memo, useState } from "react";
-import { useFavorite } from '../../../hooks/useFavorite';  // add this line
+import { FC, memo, useEffect, useState } from "react";
+import { useFavorite } from '../../../hooks/useFavorite';
 
 type Props = {
   id: number;
@@ -28,19 +28,29 @@ export const ShopCard: FC<Props> = memo((props) => {
 
   const [isFavorited, setIsFavorited] = useState(false);
   
-  const { favoriteShop, unfavoriteShop } = useFavorite();
+  const { favoriteShop, unfavoriteShop, checkFavorite } = useFavorite(); 
 
-  const toggleFavorite = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setIsFavorited((prevIsFavorited) => {
-      if (prevIsFavorited) {
-        unfavoriteShop(id); // お気に入りから削除する
-      } else {
-        favoriteShop(id); // お気に入りに追加する
-      }
-      return !prevIsFavorited;
-    });
-  };
+  useEffect(() => {
+    checkFavorite(id)
+      .then((favorited) => {
+        setIsFavorited(favorited);
+      });
+  }, [checkFavorite, id]);
+
+  const toggleFavorite = async (event: React.MouseEvent) => {
+  event.stopPropagation();
+
+  try {
+    if (isFavorited) {
+      await unfavoriteShop(id);
+    } else {
+      await favoriteShop(id);
+    }
+    setIsFavorited(!isFavorited);
+  } catch {
+    console.error('Failed to toggle favorite status');
+  }
+};
 
   return (
     <Box
@@ -95,4 +105,5 @@ export const ShopCard: FC<Props> = memo((props) => {
     </Box>
   );
 });
+
 

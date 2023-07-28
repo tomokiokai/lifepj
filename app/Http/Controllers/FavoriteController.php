@@ -38,5 +38,16 @@ class FavoriteController extends Controller
             return response()->json(['message' => 'Favorite not found'], 404);
         }
     }
+    
+    public function check(Request $request, $shop)
+    {
+        // 指定されたショップがお気に入りに追加されているか確認
+        $favorite = Favorite::where('user_id', $request->userId)
+            ->where('shop_id', $shop)
+            ->first();
+        $isFavorite = $favorite != null;
+        return response()->json(['isFavorite' => $isFavorite]);
+    }
 
+    
 }

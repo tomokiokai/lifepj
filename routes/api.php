@@ -33,5 +33,5 @@ Route::post('/reservations', [ReservationController::class, 'store']);
 Route::get('/favorites', [FavoriteController::class, 'index']);
 Route::post('/favorites', [FavoriteController::class, 'store']);
 Route::delete('/favorites/{shop}', [FavoriteController::class, 'destroy']);
-
+Route::get('/favorites/{shop}', [FavoriteController::class, 'check']);
 
