@@ -228,20 +228,30 @@ export const ShopDetailModal: FC<Props> = memo((props) => {
             </FormControl>
           </Grid>
         </Stack>
-
-         <Button onClick={() => {
-  if (shop?.id !== undefined && (adults > 0 || children > 0)) {
-    handleReserve(shop.id, reserveDate, time, adults, children, serviceTypeAdult, serviceTypeChildren)
-} else {
-    // Show error message
-    if (shop?.id === undefined) {
-      showMessage({ title: "Shop ID is undefined", status: "error" });
-    } 
-    if (adults === 0 && children === 0) {
-      showMessage({ title: "人数とサービスを選択して下さい", status: "error" });
-    }
-}
-}}>予約</Button>
+        <Button onClick={() => {
+          if (shop?.id !== undefined && (adults > 0 || children > 0)) {
+            handleReserve(shop.id, reserveDate, time, adults, children, serviceTypeAdult, serviceTypeChildren);
+            // Reset the form fields after the reservation
+            setReserveDate(currentDate);
+            setTime(roundedCurrentTime);
+            setAdults(0);
+            setChildren(0);
+            setServiceTypeAdult(null);
+            setServiceTypeChildren(null);
+            setServicePriceAdult(null);
+            setServicePriceChildren(null);
+            setAdultTotal(0);
+            setChildTotal(0);
+          } else {
+            // Show error message
+            if (shop?.id === undefined) {
+              showMessage({ title: "Shop ID is undefined", status: "error" });
+            } 
+            if (adults === 0 && children === 0) {
+              showMessage({ title: "人数とサービスを選択して下さい", status: "error" });
+            }
+        }
+        }}>予約</Button>
 
       </Stack>
     </ModalBody>

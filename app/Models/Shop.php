@@ -34,4 +34,9 @@ class Shop extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 }

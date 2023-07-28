@@ -7,6 +7,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\ServicePriceController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,8 @@ Route::get('/service_types', [ServiceTypeController::class, 'index']);
 Route::get('/service_prices', [ServicePriceController::class, 'index']);
 Route::get('/reservations', [ReservationController::class, 'index']);
 Route::post('/reservations', [ReservationController::class, 'store']);
+Route::get('/favorites', [FavoriteController::class, 'index']);
+Route::post('/favorites', [FavoriteController::class, 'store']);
+Route::delete('/favorites/{shop}', [FavoriteController::class, 'destroy']);
+
 
