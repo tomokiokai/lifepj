@@ -5,13 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Favorite;
 use App\Models\Shop;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class FavoriteController extends Controller
 {
     public function index(Request $request)
     {
+        // ユーザーIDをリクエストから取得
+        $userId = $request->input('userId');
+
         // ログインユーザーのお気に入りのショップの情報を取得
-        $favorites = Favorite::where('user_id', $request->user()->id)->get();
+        $favorites = Favorite::where('user_id', $userId)->get();
+        $shops = Shop::whereIn('id', $favorites->pluck('shop_id'))->get();
+        return response()->json(['shops' => $shops]);
+    }
+
+    public function userFavorites(Request $request)
+    {
+        if (Auth::check()) {
+            Log::info('User is authenticated.');
+        } else {
+            Log::info('User is not authenticated.');
+        }
+        $userId = Auth::id(); // <-- 認証済みのユーザーIDを取得
+
+        $favorites = Favorite::where('user_id', $userId)->get();
         $shops = Shop::whereIn('id', $favorites->pluck('shop_id'))->get();
         return response()->json(['shops' => $shops]);
     }

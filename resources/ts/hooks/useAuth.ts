@@ -21,6 +21,9 @@ export const useAuth = () => {
 
         localStorage.setItem("token", token);
 
+        // axios のデフォルトヘッダーに Authorization を設定
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
         // ユーザー情報をRecoil stateに保存
         setLoginUser(user);
 
@@ -28,8 +31,6 @@ export const useAuth = () => {
         localStorage.setItem("loginUser", JSON.stringify(user));
 
         showMessage({ title: "ログインしました", status: "success" });
-
-        console.log(user);
 
         navigate("/home");
 
@@ -50,11 +51,13 @@ export const useAuth = () => {
     try {
       await axios.post("/api/logout");
 
-      // ローカルストレージからユーザー情報を削除
+      // ローカルストレージからユーザー情報とトークンを削除
       localStorage.removeItem("loginUser");
-
       localStorage.removeItem("token");
-      
+
+      // axios のデフォルトヘッダーから Authorization を削除
+      delete axios.defaults.headers.common['Authorization'];
+
       setLoginUser(null);
 
       showMessage({ title: "ログアウトしました", status: "success" });

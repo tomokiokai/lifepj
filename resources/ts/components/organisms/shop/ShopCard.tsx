@@ -11,6 +11,7 @@ type Props = {
   area: string;
   address: string;
   genre: string;
+  reservationDate?: string;
   onClick: (id: number) => void;
 };
 
@@ -23,8 +24,19 @@ export const ShopCard: FC<Props> = memo((props) => {
     area,
     address,
     genre,
+    reservationDate,
     onClick,
   } = props;
+
+  const [cardHeight, setCardHeight] = useState('380px'); 
+
+  useEffect(() => {
+    if (reservationDate) {
+      setCardHeight('420px'); // 予約時間が存在する場合、カードの高さを増やす
+    } else {
+      setCardHeight('380px'); // 予約時間が存在しない場合、元の高さを保つ
+    }
+  }, [reservationDate]);
 
   const [isFavorited, setIsFavorited] = useState(false);
   
@@ -55,7 +67,7 @@ export const ShopCard: FC<Props> = memo((props) => {
   return (
     <Box
       w="260px"
-      h="380px"
+      h={cardHeight} // 高さをstateから取得
       bg="white"
       borderRadius="10px"
       shadow="md"
@@ -84,17 +96,14 @@ export const ShopCard: FC<Props> = memo((props) => {
         <Text fontSize="sm" color="gray">
           {area}
         </Text>
-        <VStack
-          spacing={1}
-          overflowY="auto"
-          maxH="60px"
-          align="center"
-          mb="24px"
-        >
-          <Text fontSize="sm" color="gray">
+        <Text fontSize="sm" color="gray">
             {address}
+        </Text>
+        {reservationDate && ( // 予約日時が存在すれば表示
+          <Text fontSize="m" color="blue">
+            Reservation: {reservationDate}
           </Text>
-        </VStack>
+        )}
         <FaHeart
           color={isFavorited ? "tomato" : "gray"}
           onClick={toggleFavorite}

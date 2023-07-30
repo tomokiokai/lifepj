@@ -43,29 +43,19 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
   };
 
   const handleGoogleLogin = () => {
-     console.log("handleGoogleLogin is called"); // これを追加
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
     const redirectUri = process.env.REACT_APP_GOOGLE_REDIRECT_URI || "http://localhost";
     const scope = "profile email";
     
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
-    console.log("Auth URL:", authUrl); // これを追加
-    console.log("Before redirect"); // 追加
-    // GoogleのOAuth 2.0エンドポイントにリダイレクト
     window.location.href = authUrl;
-    console.log("After redirect"); // 追加
   };
 
   const handleGoogleCallback = (code:string) => {
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
-    const clientSecret =process.env.REACT_APP_GOOGLE_CLIENT_SECRET || "";
+    const clientSecret = process.env.REACT_APP_GOOGLE_CLIENT_SECRET || "";
     const redirectUri = process.env.REACT_APP_GOOGLE_REDIRECT_URI || "http://localhost";
-
-      // ここで変数の値をログ出力
-    console.log('clientId:', clientId);
-    console.log('clientSecret:', clientSecret);
-    console.log('redirectUri:', redirectUri);
 
     axios.post("https://oauth2.googleapis.com/token", qs.stringify({
       code,
@@ -78,40 +68,38 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
-  }
-    )
-      .then(response => {
-      console.log(response); // 追加
+    })
+    .then(response => {
         const idToken = response.data.id_token;
-        console.log(idToken);
+
       return axios.post("/api/google-login", { googleToken: idToken });
     })
     .then(response => {
-      console.log(response);
-      localStorage.setItem('loginUser', JSON.stringify(response.data.user));
-    setLoginUser(response.data.user);
+  const userData = {
+    ...response.data.user,  // 既存のユーザーデータ
+    token: response.data.token  // トークンを追加
+  };
+  localStorage.setItem('loginUser', JSON.stringify(userData));  // ローカルストレージに保存
+  setLoginUser(userData);  // Recoilステートに保存
 
-    if (response.data.error) {
+      if (response.data.error) {
         showMessage({ title: response.data.error, status: "error" });
-    } else if (!response.data.user?.is_verified) {
+      } else if (!response.data.user?.is_verified) {
         showMessage({ title: response.data.message, status: "info" });
-    } else {
+      } else {
         localStorage.setItem('token', response.data.token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
         showMessage({ title: "ログインしました", status: "success" });
         navigate("/home");
-    }
-})
-      .catch(error => {
-      console.error(error.response.data);
-      console.error(error);
-      // Handle errors
+      }
+    })
+    .catch(error => {
       if (!error.response || error.response.status === 500) {
-    // ここでは特に500エラー（サーバーエラー）の場合にメッセージを表示します。
-    showMessage({ title: "Server error occurred", status: "error" });
-  }
+        showMessage({ title: "Server error occurred", status: "error" });
+      }
     });
-};
-
+  };
 
   return (
     <Flex align="center" justify="center" height="100vh">
@@ -141,7 +129,6 @@ export const Login: FC<LoginProps> = memo(({ login, loading }) => {
           </PrimaryButton>
           {/* Google Login */}
           <GoogleLoginButton onClick={handleGoogleLogin} buttonText="Login with Google" />
-          Regenerate response
           <Flex align="center" justify="center">
             <Link to="/register">Registerはこちら</Link>
           </Flex>

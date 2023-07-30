@@ -32,6 +32,7 @@ export const Header = () => {
     logout();
     localStorage.removeItem("loginUser"); // ローカルストレージからユーザー情報を削除
   }, [logout]);
+  const onClickMyPage = useCallback(() => navigate("/home/mypage"), [navigate]);
 
   return (
     <>
@@ -63,8 +64,10 @@ export const Header = () => {
               <Link onClick={onClickUserManagement}>Users</Link>
             </Box>
           )}
-          
-          <Link onClick={onClickShopManagement}>Shop</Link>
+          <Box pr={4}>
+            <Link onClick={onClickShopManagement}>Shop</Link>
+          </Box>
+          <Link onClick={onClickMyPage}>MyPage</Link>
         </Flex>
         <Box>
           {loginUser && (

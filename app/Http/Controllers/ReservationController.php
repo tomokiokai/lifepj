@@ -4,14 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::with('shop')->get();
         return response()->json(['reservations' => $reservations], 200);
     }
+
+    public function userReservations(Request $request)
+    {
+        $userId = Auth::id(); // <-- 認証済みのユーザーIDを取得
+
+        $reservations = Reservation::with('shop')->where('user_id', $userId)->get();
+        return response()->json(['reservations' => $reservations], 200);
+    }
+
 
     public function store(Request $request)
     {

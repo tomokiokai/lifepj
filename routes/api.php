@@ -29,9 +29,12 @@ Route::get('/shops', [ShopController::class, 'index']);
 Route::get('/service_types', [ServiceTypeController::class, 'index']);
 Route::get('/service_prices', [ServicePriceController::class, 'index']);
 Route::get('/reservations', [ReservationController::class, 'index']);
+Route::get('/user_reservations', [ReservationController::class, 'userReservations'])->middleware('auth:api');
+
 Route::post('/reservations', [ReservationController::class, 'store']);
 Route::get('/favorites', [FavoriteController::class, 'index']);
 Route::post('/favorites', [FavoriteController::class, 'store']);
+Route::get('/user_favorites', [FavoriteController::class, 'userFavorites'])->middleware('auth:api');;
 Route::delete('/favorites/{shop}', [FavoriteController::class, 'destroy']);
 Route::get('/favorites/{shop}', [FavoriteController::class, 'check']);
 

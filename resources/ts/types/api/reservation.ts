@@ -1,3 +1,5 @@
+import { Shop } from "./shop";
+
 export type Reservation = {
   id: number;
   date: Date;
@@ -10,4 +12,5 @@ export type Reservation = {
   service_type_children: number;
   created_at: Date;
   updated_at: Date;
+  shop: Shop;
 };

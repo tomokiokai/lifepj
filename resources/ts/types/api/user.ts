@@ -21,4 +21,5 @@ export type User = {
     bs: string;
   };
   role: number; // ロールプロパティを追加
+  token: string;
 };
